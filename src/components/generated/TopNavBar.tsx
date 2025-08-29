@@ -18,35 +18,35 @@ export const TopNavBar = ({
     label: 'Initiate',
     icon: FileText,
     description: 'Create new RFI/RFQ',
-    mpid: "169307a2-ad06-4387-9f37-7bcd65c38ba3"
+    mpid: "364bd5c9-3308-46f4-8867-119c106f8fad"
   }, {
     id: 'view' as NavigationTab,
     label: 'View',
     icon: Eye,
     description: 'View active requests',
-    mpid: "657ebfec-bc8e-46f7-8d4c-460ae4e1cd0a"
+    mpid: "acdf4963-5798-4e29-b776-b56637a30452"
   }, {
     id: 'score' as NavigationTab,
     label: 'Score',
     icon: BarChart3,
     description: 'Evaluate responses',
-    mpid: "dd73d695-f56d-4863-abb4-8f3acd4642a5"
+    mpid: "93e1439b-f9d6-4684-b0c0-71245a258325"
   }, {
     id: 'award' as NavigationTab,
     label: 'Award',
     icon: Award,
     description: 'Award contracts',
-    mpid: "2d6aa75e-a6d5-433e-aacd-b0e5cac7f242"
+    mpid: "be033ca7-dbd1-42db-a111-f2e127d98e12"
   }] as any[];
 
   // @return
-  return <SortableContainer dndKitId="24c43dab-af66-4ab5-8ba1-af67340f4a15" containerType="regular" prevTag="nav" className="bg-gradient-to-r from-navy-900 to-navy-800 border-b border-navy-700 shadow-lg" style={{
+  return <SortableContainer dndKitId="35250f21-a291-4516-a050-fb2d33815bbb" containerType="regular" prevTag="nav" className="bg-gradient-to-r from-navy-900 to-navy-800 border-b border-navy-700 shadow-lg" style={{
     backgroundColor: '#1e293b'
   }} data-magicpath-id="0" data-magicpath-path="TopNavBar.tsx">
-      <SortableContainer dndKitId="fe93a5a1-424a-449e-a717-a116a9068242" containerType="regular" prevTag="div" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-magicpath-id="1" data-magicpath-path="TopNavBar.tsx">
-        <SortableContainer dndKitId="32289bd6-4acc-4789-b9bc-a623d4e7021f" containerType="regular" prevTag="div" className="flex items-center justify-between h-16" data-magicpath-id="2" data-magicpath-path="TopNavBar.tsx">
-          <SortableContainer dndKitId="918d515c-48d5-4066-858e-cc32711677f4" containerType="regular" prevTag="div" className="flex items-center space-x-3" data-magicpath-id="3" data-magicpath-path="TopNavBar.tsx">
-            <SortableContainer dndKitId="711348aa-6ca6-4347-a20a-ea2c6ebd739e" containerType="regular" prevTag="div" className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center shadow-lg" data-magicpath-id="4" data-magicpath-path="TopNavBar.tsx">
+      <SortableContainer dndKitId="ab47f8d5-654a-4731-8b81-e8a37d06bc74" containerType="regular" prevTag="div" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-magicpath-id="1" data-magicpath-path="TopNavBar.tsx">
+        <SortableContainer dndKitId="bdea7754-e3c6-4d00-ae27-94bbaae03405" containerType="regular" prevTag="div" className="flex items-center justify-between h-16" data-magicpath-id="2" data-magicpath-path="TopNavBar.tsx">
+          <SortableContainer dndKitId="06eaa47d-05ab-4593-b4ed-a4f4526c5068" containerType="regular" prevTag="div" className="flex items-center space-x-3" data-magicpath-id="3" data-magicpath-path="TopNavBar.tsx">
+            <SortableContainer dndKitId="9232176f-bf17-4b90-8291-63a6e1e8f322" containerType="regular" prevTag="div" className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center shadow-lg" data-magicpath-id="4" data-magicpath-path="TopNavBar.tsx">
               <span className="text-white font-bold text-lg" data-magicpath-id="5" data-magicpath-path="TopNavBar.tsx">P</span>
             </SortableContainer>
             <h1 className="text-2xl font-bold text-white tracking-tight" data-magicpath-id="6" data-magicpath-path="TopNavBar.tsx">
@@ -54,7 +54,7 @@ export const TopNavBar = ({
             </h1>
           </SortableContainer>
 
-          <SortableContainer dndKitId="0f7bebe3-d9a1-45fe-b2ee-1867d8cbc5fd" containerType="collection" prevTag="div" className="flex space-x-2" data-magicpath-id="8" data-magicpath-path="TopNavBar.tsx">
+          <SortableContainer dndKitId="0fb15b1e-c27d-4749-9ef7-b00d52cfe1ce" containerType="collection" prevTag="div" className="flex space-x-2" data-magicpath-id="8" data-magicpath-path="TopNavBar.tsx">
             {navItems.map(item => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
