@@ -43,7 +43,7 @@ export const ScorePage = ({
     aiRecommendation: 'Strong technical capabilities with excellent compliance record. Pricing is competitive.',
     strengths: ['Advanced technical expertise', 'Strong compliance history', 'Proven track record'],
     weaknesses: ['Higher pricing than competitors', 'Limited local presence'],
-    mpid: "c4fe4059-3829-472b-ae04-dbcef5c25d0a"
+    mpid: "8ae5cdfe-a6bc-4c0e-be57-5d4a8ab97e3f"
   }, {
     id: '2',
     vendorName: 'Digital Innovations',
@@ -55,7 +55,7 @@ export const ScorePage = ({
     aiRecommendation: 'Excellent technical solution with innovative approach. Best overall value proposition.',
     strengths: ['Innovative solutions', 'Competitive pricing', 'Strong technical team'],
     weaknesses: ['Newer company', 'Limited enterprise experience'],
-    mpid: "ac705cdb-b04a-4b77-bb7d-1317e2bfce61"
+    mpid: "c4e76d50-7558-402b-9ec1-4dac5d6bd982"
   }, {
     id: '3',
     vendorName: 'CloudTech Partners',
@@ -67,7 +67,7 @@ export const ScorePage = ({
     aiRecommendation: 'Cost-effective solution with good technical approach. Reliable delivery partner.',
     strengths: ['Most competitive pricing', 'Fast implementation', 'Good support model'],
     weaknesses: ['Basic technical approach', 'Limited customization options'],
-    mpid: "40377186-36cd-40a3-9537-684299d0fe4d"
+    mpid: "bd56ba8f-4ffe-413e-95d8-3027cde21143"
   }];
   const currentRFIRFQ = selectedRFIRFQ ? rfirfqData.find(item => item.id === selectedRFIRFQ) : null;
   const handleScoreVendor = async (vendorId: string) => {
@@ -104,9 +104,9 @@ export const ScorePage = ({
   };
   if (!currentRFIRFQ) {
     // @return
-    return <SortableContainer dndKitId="230369f5-59ad-4bbe-b35a-983b9bba1ab3" containerType="regular" prevTag="div" className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6" data-magicpath-id="0" data-magicpath-path="ScorePage.tsx">
-        <SortableContainer dndKitId="87140757-4ba7-45f7-898a-b979444e7105" containerType="regular" prevTag="div" className="max-w-4xl mx-auto" data-magicpath-id="1" data-magicpath-path="ScorePage.tsx">
-          <SortableContainer dndKitId="26ef49a4-e2be-4a00-bb9d-6f72c270be96" containerType="regular" prevTag="div" className="bg-white rounded-2xl shadow-xl p-8 text-center" data-magicpath-id="2" data-magicpath-path="ScorePage.tsx">
+    return <SortableContainer dndKitId="68db3690-4102-4dbd-88d9-0c666fb65839" containerType="regular" prevTag="div" className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6" data-magicpath-id="0" data-magicpath-path="ScorePage.tsx">
+        <SortableContainer dndKitId="1385333b-34c1-43bf-8883-19394ab8f552" containerType="regular" prevTag="div" className="max-w-4xl mx-auto" data-magicpath-id="1" data-magicpath-path="ScorePage.tsx">
+          <SortableContainer dndKitId="1544cfeb-dfbf-4dee-9a59-b49fdfe9c7b6" containerType="regular" prevTag="div" className="bg-white rounded-2xl shadow-xl p-8 text-center" data-magicpath-id="2" data-magicpath-path="ScorePage.tsx">
             <BarChart3 className="w-16 h-16 text-slate-300 mx-auto mb-4" data-magicpath-id="3" data-magicpath-path="ScorePage.tsx" />
             <h2 className="text-xl font-semibold text-slate-600 mb-2" data-magicpath-id="4" data-magicpath-path="ScorePage.tsx">
               <span data-magicpath-id="5" data-magicpath-path="ScorePage.tsx">No RFI/RFQ Selected</span>
@@ -120,15 +120,15 @@ export const ScorePage = ({
   }
 
   // @return
-  return <SortableContainer dndKitId="82b5da0e-700d-4e7a-ba87-ebaf1d7a3abc" containerType="regular" prevTag="div" className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6" data-magicpath-id="8" data-magicpath-path="ScorePage.tsx">
-      <SortableContainer dndKitId="f3e684e8-b5af-4250-abd6-624e7d73e009" containerType="regular" prevTag="div" className="max-w-7xl mx-auto" data-magicpath-id="9" data-magicpath-path="ScorePage.tsx">
-        <SortableContainer dndKitId="3bd4d862-1ee6-4773-bb91-21c45a89204c" containerType="regular" prevTag="div" className="bg-white rounded-2xl shadow-xl p-8" data-magicpath-id="10" data-magicpath-path="ScorePage.tsx">
-          <SortableContainer dndKitId="f868d4dd-08e3-4d01-bbc7-86b41ef57ef6" containerType="regular" prevTag="div" className="flex items-center justify-between mb-8" data-magicpath-id="11" data-magicpath-path="ScorePage.tsx">
-            <SortableContainer dndKitId="60f6dba8-0223-41b0-a6f5-380bd87df114" containerType="regular" prevTag="div" className="flex items-center space-x-3" data-magicpath-id="12" data-magicpath-path="ScorePage.tsx">
-              <SortableContainer dndKitId="5b294ab9-c3c5-46d0-bfba-250cb2e0b1fd" containerType="regular" prevTag="div" className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center" data-magicpath-id="13" data-magicpath-path="ScorePage.tsx">
+  return <SortableContainer dndKitId="d310535d-4bf5-49c7-aec4-f5b815504c39" containerType="regular" prevTag="div" className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6" data-magicpath-id="8" data-magicpath-path="ScorePage.tsx">
+      <SortableContainer dndKitId="ccd0d4bd-b8bb-4e10-9913-15c18c2f297e" containerType="regular" prevTag="div" className="max-w-7xl mx-auto" data-magicpath-id="9" data-magicpath-path="ScorePage.tsx">
+        <SortableContainer dndKitId="82382b35-828a-4487-9662-b0c195b5bb5e" containerType="regular" prevTag="div" className="bg-white rounded-2xl shadow-xl p-8" data-magicpath-id="10" data-magicpath-path="ScorePage.tsx">
+          <SortableContainer dndKitId="7e339f89-1cc2-47cc-a63a-6a31ac5b3862" containerType="regular" prevTag="div" className="flex items-center justify-between mb-8" data-magicpath-id="11" data-magicpath-path="ScorePage.tsx">
+            <SortableContainer dndKitId="ae253912-08ef-4232-877a-ea2a2e1cddf0" containerType="regular" prevTag="div" className="flex items-center space-x-3" data-magicpath-id="12" data-magicpath-path="ScorePage.tsx">
+              <SortableContainer dndKitId="235ec28d-c250-41b2-b06a-6b5de5dd1a12" containerType="regular" prevTag="div" className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center" data-magicpath-id="13" data-magicpath-path="ScorePage.tsx">
                 <BarChart3 className="w-5 h-5 text-blue-600" data-magicpath-id="14" data-magicpath-path="ScorePage.tsx" />
               </SortableContainer>
-              <SortableContainer dndKitId="b51175c3-8c40-4a69-9121-186c15a6de37" containerType="regular" prevTag="div" data-magicpath-id="15" data-magicpath-path="ScorePage.tsx">
+              <SortableContainer dndKitId="95abe9e7-3008-47d1-99d9-d90dcdf3ffdf" containerType="regular" prevTag="div" data-magicpath-id="15" data-magicpath-path="ScorePage.tsx">
                 <h1 className="text-3xl font-bold text-slate-800" data-magicpath-id="16" data-magicpath-path="ScorePage.tsx">
                   <span data-magicpath-id="17" data-magicpath-path="ScorePage.tsx">Score Responses</span>
                 </h1>
@@ -138,13 +138,13 @@ export const ScorePage = ({
               </SortableContainer>
             </SortableContainer>
 
-            {vendorScores.length > 0 && <SortableContainer dndKitId="c39c2f70-e8f8-4cac-a7ba-1e25e039c0d4" containerType="regular" prevTag="button" onClick={handleCompareAll} className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center space-x-2" data-magicpath-id="20" data-magicpath-path="ScorePage.tsx">
+            {vendorScores.length > 0 && <SortableContainer dndKitId="9d7e73dd-358a-47c0-87e5-2cb7cb40405c" containerType="regular" prevTag="button" onClick={handleCompareAll} className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center space-x-2" data-magicpath-id="20" data-magicpath-path="ScorePage.tsx">
                 <TrendingUp className="w-5 h-5" data-magicpath-id="21" data-magicpath-path="ScorePage.tsx" />
                 <span data-magicpath-id="22" data-magicpath-path="ScorePage.tsx">Compare All</span>
               </SortableContainer>}
           </SortableContainer>
 
-          <SortableContainer dndKitId="b5b439dd-6f7e-47d6-9292-5b634bf190e1" containerType="collection" prevTag="div" className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-8" data-magicpath-id="23" data-magicpath-path="ScorePage.tsx">
+          <SortableContainer dndKitId="1253efc7-b47e-435a-a5da-10ef74a19330" containerType="collection" prevTag="div" className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-8" data-magicpath-id="23" data-magicpath-path="ScorePage.tsx">
             {mockVendorData.map(vendor => {
             const scoredVendor = vendorScores.find(v => v.id === vendor.id);
             const isScored = !!scoredVendor;
@@ -226,9 +226,9 @@ export const ScorePage = ({
           })}
           </SortableContainer>
 
-          {showComparison && vendorScores.length > 0 && <SortableContainer dndKitId="ba45b8bf-57bb-444f-bc87-45d651907813" containerType="regular" prevTag="div" className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-8 border border-green-200" data-magicpath-id="66" data-magicpath-path="ScorePage.tsx">
-              <SortableContainer dndKitId="3bec1c50-b0c7-4717-b1e4-e0a930a609b3" containerType="regular" prevTag="div" className="flex items-center space-x-3 mb-6" data-magicpath-id="67" data-magicpath-path="ScorePage.tsx">
-                <SortableContainer dndKitId="d5d84100-42fb-498f-a66e-88a9f52002bf" containerType="regular" prevTag="div" className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center" data-magicpath-id="68" data-magicpath-path="ScorePage.tsx">
+          {showComparison && vendorScores.length > 0 && <SortableContainer dndKitId="67abd454-dcca-4a85-836f-6861e460b0a3" containerType="regular" prevTag="div" className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-8 border border-green-200" data-magicpath-id="66" data-magicpath-path="ScorePage.tsx">
+              <SortableContainer dndKitId="13e55d86-432f-45f2-b1fc-66153e573f4c" containerType="regular" prevTag="div" className="flex items-center space-x-3 mb-6" data-magicpath-id="67" data-magicpath-path="ScorePage.tsx">
+                <SortableContainer dndKitId="469489c4-ee18-42fd-aace-7131af9048fc" containerType="regular" prevTag="div" className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center" data-magicpath-id="68" data-magicpath-path="ScorePage.tsx">
                   <TrendingUp className="w-5 h-5 text-green-600" data-magicpath-id="69" data-magicpath-path="ScorePage.tsx" />
                 </SortableContainer>
                 <h2 className="text-2xl font-bold text-slate-800" data-magicpath-id="70" data-magicpath-path="ScorePage.tsx">
@@ -236,12 +236,12 @@ export const ScorePage = ({
                 </h2>
               </SortableContainer>
 
-              <SortableContainer dndKitId="df49c3d3-f5f9-4f54-9a6d-08ec4dfad00b" containerType="regular" prevTag="div" className="grid grid-cols-1 lg:grid-cols-2 gap-8" data-magicpath-id="72" data-magicpath-path="ScorePage.tsx">
-                <SortableContainer dndKitId="e4464073-7385-41d4-811a-ec1058608c66" containerType="regular" prevTag="div" data-magicpath-id="73" data-magicpath-path="ScorePage.tsx">
+              <SortableContainer dndKitId="3e019069-e772-46e7-aacd-7e1339735611" containerType="regular" prevTag="div" className="grid grid-cols-1 lg:grid-cols-2 gap-8" data-magicpath-id="72" data-magicpath-path="ScorePage.tsx">
+                <SortableContainer dndKitId="e5a3d649-eeb1-4470-8c87-aa96cc046517" containerType="regular" prevTag="div" data-magicpath-id="73" data-magicpath-path="ScorePage.tsx">
                   <h3 className="text-lg font-semibold text-slate-800 mb-4" data-magicpath-id="74" data-magicpath-path="ScorePage.tsx">
                     <span data-magicpath-id="75" data-magicpath-path="ScorePage.tsx">Vendor Rankings</span>
                   </h3>
-                  <SortableContainer dndKitId="af56ffa2-e769-43d8-879d-27f26bf0ab32" containerType="collection" prevTag="div" className="space-y-3" data-magicpath-id="76" data-magicpath-path="ScorePage.tsx">
+                  <SortableContainer dndKitId="01a10247-c0c4-4bfd-b5bf-87098733944b" containerType="collection" prevTag="div" className="space-y-3" data-magicpath-id="76" data-magicpath-path="ScorePage.tsx">
                     {vendorScores.sort((a, b) => b.score - a.score).map((vendor, index) => <div key={vendor.id} className="flex items-center justify-between p-3 bg-white rounded-lg" data-magicpath-uuid={(vendor as any)["mpid"] ?? "unsafe"} data-magicpath-id="77" data-magicpath-path="ScorePage.tsx">
                           <div className="flex items-center space-x-3" data-magicpath-uuid={(vendor as any)["mpid"] ?? "unsafe"} data-magicpath-id="78" data-magicpath-path="ScorePage.tsx">
                             <div className={`
@@ -260,19 +260,19 @@ export const ScorePage = ({
                   </SortableContainer>
                 </SortableContainer>
 
-                <SortableContainer dndKitId="8939801d-20ee-4ab1-8ed9-332ed56602e8" containerType="regular" prevTag="div" data-magicpath-id="85" data-magicpath-path="ScorePage.tsx">
+                <SortableContainer dndKitId="e32da54e-e43b-40df-82a7-de8ff4f8a060" containerType="regular" prevTag="div" data-magicpath-id="85" data-magicpath-path="ScorePage.tsx">
                   <h3 className="text-lg font-semibold text-slate-800 mb-4" data-magicpath-id="86" data-magicpath-path="ScorePage.tsx">
                     <span data-magicpath-id="87" data-magicpath-path="ScorePage.tsx">Recommended Vendor</span>
                   </h3>
                   {(() => {
                 const recommended = getRecommendedVendor();
                 if (!recommended) return null;
-                return <SortableContainer dndKitId="6c7dc783-3a5c-40d9-a901-7c3b0f0f06c0" containerType="regular" prevTag="div" className="bg-white rounded-lg p-6 border-2 border-green-300" data-magicpath-id="88" data-magicpath-path="ScorePage.tsx">
-                        <SortableContainer dndKitId="ee1d0a16-a0f4-4d74-bed6-adfb7b63ea0a" containerType="regular" prevTag="div" className="flex items-center justify-between mb-4" data-magicpath-id="89" data-magicpath-path="ScorePage.tsx">
+                return <SortableContainer dndKitId="21973e20-dba3-456f-9906-5dc73bb66d01" containerType="regular" prevTag="div" className="bg-white rounded-lg p-6 border-2 border-green-300" data-magicpath-id="88" data-magicpath-path="ScorePage.tsx">
+                        <SortableContainer dndKitId="6b84bce0-214e-4842-acee-1bfea709902c" containerType="regular" prevTag="div" className="flex items-center justify-between mb-4" data-magicpath-id="89" data-magicpath-path="ScorePage.tsx">
                           <h4 className="text-xl font-bold text-slate-800" data-magicpath-id="90" data-magicpath-path="ScorePage.tsx">
                             <span data-magicpath-id="91" data-magicpath-path="ScorePage.tsx">{recommended.vendorName}</span>
                           </h4>
-                          <SortableContainer dndKitId="bb4cce97-e1a4-4d7a-a83f-2037da791d18" containerType="regular" prevTag="div" className="flex items-center space-x-1" data-magicpath-id="92" data-magicpath-path="ScorePage.tsx">
+                          <SortableContainer dndKitId="16078338-d015-4ca8-8b0a-5edb01b2ac07" containerType="regular" prevTag="div" className="flex items-center space-x-1" data-magicpath-id="92" data-magicpath-path="ScorePage.tsx">
                             <Award className="w-5 h-5 text-green-600" data-magicpath-id="93" data-magicpath-path="ScorePage.tsx" />
                             <span className="text-xl font-bold text-green-600" data-magicpath-id="94" data-magicpath-path="ScorePage.tsx">{recommended.score}</span>
                           </SortableContainer>
@@ -282,8 +282,8 @@ export const ScorePage = ({
                           <span data-magicpath-id="96" data-magicpath-path="ScorePage.tsx">{recommended.aiRecommendation}</span>
                         </p>
 
-                        <SortableContainer dndKitId="c79b299e-263b-4b23-bb19-878e29786095" containerType="regular" prevTag="div" className="grid grid-cols-1 gap-4 mb-6" data-magicpath-id="97" data-magicpath-path="ScorePage.tsx">
-                          <SortableContainer dndKitId="98db3dff-2793-4b89-8c5d-ed72e6a50f92" containerType="regular" prevTag="div" data-magicpath-id="98" data-magicpath-path="ScorePage.tsx">
+                        <SortableContainer dndKitId="891ba0a9-5a1d-411e-9bca-6a4df00fe9dd" containerType="regular" prevTag="div" className="grid grid-cols-1 gap-4 mb-6" data-magicpath-id="97" data-magicpath-path="ScorePage.tsx">
+                          <SortableContainer dndKitId="d64acc2f-eb33-4320-b829-dd6a5305634c" containerType="regular" prevTag="div" data-magicpath-id="98" data-magicpath-path="ScorePage.tsx">
                             <h5 className="font-medium text-green-800 mb-2" data-magicpath-id="99" data-magicpath-path="ScorePage.tsx">
                               <span data-magicpath-id="100" data-magicpath-path="ScorePage.tsx">Strengths</span>
                             </h5>
@@ -296,7 +296,7 @@ export const ScorePage = ({
                           </SortableContainer>
                         </SortableContainer>
 
-                        <SortableContainer dndKitId="0d12d443-b262-489e-abeb-780f224623c0" containerType="regular" prevTag="button" onClick={() => handleSelectVendor(recommended.vendorName)} className="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-700 transition-colors flex items-center justify-center space-x-2" data-magicpath-id="105" data-magicpath-path="ScorePage.tsx">
+                        <SortableContainer dndKitId="e1331a2e-471b-4b57-8a08-41da84226cbc" containerType="regular" prevTag="button" onClick={() => handleSelectVendor(recommended.vendorName)} className="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-700 transition-colors flex items-center justify-center space-x-2" data-magicpath-id="105" data-magicpath-path="ScorePage.tsx">
                           <Award className="w-5 h-5" data-magicpath-id="106" data-magicpath-path="ScorePage.tsx" />
                           <span data-magicpath-id="107" data-magicpath-path="ScorePage.tsx">Select This Vendor</span>
                         </SortableContainer>
