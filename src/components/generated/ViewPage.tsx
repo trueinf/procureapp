@@ -21,7 +21,7 @@ const sampleRFIRFQData: RFIRFQData[] = [{
   documents: [],
   coverLetter: 'We are seeking a comprehensive cloud infrastructure solution to support our growing enterprise needs.',
   vendors: ['AWS Enterprise', 'Microsoft Azure', 'Google Cloud Platform', 'IBM Cloud', 'Oracle Cloud'],
-  mpid: "5795e91b-ad3f-4a22-9343-948f33c94867"
+  mpid: "7554dd12-c983-476f-a63b-d64b98c2a252"
 }, {
   id: 'RFI-2024-002',
   type: 'RFI',
@@ -34,7 +34,7 @@ const sampleRFIRFQData: RFIRFQData[] = [{
   documents: [],
   coverLetter: 'Request for information regarding comprehensive cybersecurity solutions for our organization.',
   vendors: ['CyberGuard Pro', 'SecureNet Solutions', 'DefenseFirst Technologies'],
-  mpid: "a592ba5a-8cd6-4715-83ed-5b0662269923"
+  mpid: "4218899d-e7d1-4723-b576-aa28f7bc8571"
 }, {
   id: 'RFQ-2024-003',
   type: 'RFQ',
@@ -47,7 +47,7 @@ const sampleRFIRFQData: RFIRFQData[] = [{
   documents: [],
   coverLetter: 'Procurement of modern office equipment and ergonomic furniture for our new headquarters.',
   vendors: ['OfficeMax Business', 'Herman Miller', 'Steelcase', 'Humanscale'],
-  mpid: "5ff8d7fa-8a27-4ff1-b410-92ebb0111244"
+  mpid: "29028b99-e6ff-4fcb-bbc8-f2f45e4653ec"
 }];
 
 // Enhanced vendor details with comprehensive information
@@ -94,21 +94,21 @@ const sampleQuestions = [{
   question: 'What is your disaster recovery strategy and RTO/RPO guarantees?',
   response: 'We provide multi-region backup with 99.99% uptime SLA, RTO of 4 hours, and RPO of 1 hour.',
   timestamp: '2024-01-16 10:30 AM',
-  mpid: "0fdd359a-68f2-4bdd-b03c-0f22c7eb8835"
+  mpid: "2d423f9e-c6cf-4f50-ac3b-b13295ff1c30"
 }, {
   id: '2',
   vendor: 'Microsoft Azure',
   question: 'Can you provide detailed pricing for different usage tiers?',
   response: 'Our pricing model includes pay-as-you-go options starting at $0.10/hour with enterprise discounts available.',
   timestamp: '2024-01-16 2:15 PM',
-  mpid: "9defaeb2-318b-4efb-b9b2-175837abe7bd"
+  mpid: "2cd8d44b-bd0f-4bf1-ae0c-ae90767d166d"
 }, {
   id: '3',
   vendor: 'AWS Enterprise',
   question: 'What compliance certifications do you maintain?',
   response: 'We maintain SOC 2 Type II, ISO 27001, FedRAMP High, and HIPAA compliance certifications.',
   timestamp: '2024-01-17 9:45 AM',
-  mpid: "c4574477-24d0-436d-bb1a-c56f21448b7c"
+  mpid: "d8d114d8-0327-4d7a-bd8c-58ee2d5b3ad3"
 }] as any[];
 
 // Sample quotations with detailed information
@@ -122,7 +122,7 @@ const sampleQuotations = [{
   totalValue: '$125,000',
   validUntil: '2024-03-15',
   deliveryTime: '4-6 weeks',
-  mpid: "9cc492e2-b398-4e1e-ada0-3fd3076afd08"
+  mpid: "c5216861-263b-46e5-a9d2-35c74e3a119a"
 }, {
   id: '2',
   vendor: 'Microsoft Azure',
@@ -133,7 +133,7 @@ const sampleQuotations = [{
   totalValue: '$118,500',
   validUntil: '2024-03-20',
   deliveryTime: '3-5 weeks',
-  mpid: "5d1e47f7-ec8d-491a-a10e-5cc9894200a8"
+  mpid: "6efc67c8-6976-49be-a00f-764e8f1b7dd8"
 }, {
   id: '3',
   vendor: 'Google Cloud Platform',
@@ -144,7 +144,7 @@ const sampleQuotations = [{
   totalValue: '$132,000',
   validUntil: '2024-03-10',
   deliveryTime: '5-7 weeks',
-  mpid: "13025ddb-ed12-48d8-a71b-9adc260886fc"
+  mpid: "e54a2e54-813e-4693-b339-f52e044b5585"
 }] as any[];
 export const ViewPage = ({
   rfirfqData,
@@ -187,34 +187,34 @@ export const ViewPage = ({
   };
   if (selectedItem) {
     const currentVendors = selectedItem.vendors || Object.keys(vendorDetails).slice(0, selectedItem.vendorCount);
-    return <SortableContainer dndKitId="5ef92228-5d68-4b83-b60b-36d24b5d1721" containerType="regular" prevTag="div" className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6" data-magicpath-id="0" data-magicpath-path="ViewPage.tsx">
-        <SortableContainer dndKitId="bb07f50c-e294-4118-baec-bff8ab9bc833" containerType="regular" prevTag="div" className="max-w-7xl mx-auto" data-magicpath-id="1" data-magicpath-path="ViewPage.tsx">
+    return <SortableContainer dndKitId="20865ce6-0a1f-4669-889a-ce092283b318" containerType="regular" prevTag="div" className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6" data-magicpath-id="0" data-magicpath-path="ViewPage.tsx">
+        <SortableContainer dndKitId="3a59eeb3-a8dd-4195-bcf3-4b70cc3c9a09" containerType="regular" prevTag="div" className="max-w-7xl mx-auto" data-magicpath-id="1" data-magicpath-path="ViewPage.tsx">
           {/* Header Section */}
-          <SortableContainer dndKitId="64900eea-0558-4659-b765-4c1a9cbf6f61" containerType="regular" prevTag="div" className="bg-white rounded-2xl shadow-lg border border-slate-200/50 mb-6" data-magicpath-id="2" data-magicpath-path="ViewPage.tsx">
-            <SortableContainer dndKitId="ba4fa9b4-d9b8-454a-93e1-f44858f9f3b2" containerType="regular" prevTag="div" className="p-6 md:p-8" data-magicpath-id="3" data-magicpath-path="ViewPage.tsx">
-              <SortableContainer dndKitId="082c3624-4001-40ed-b633-122167476a71" containerType="regular" prevTag="div" className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6" data-magicpath-id="4" data-magicpath-path="ViewPage.tsx">
-                <SortableContainer dndKitId="ed5944c7-6fea-495b-85ae-54e650e95b7f" containerType="regular" prevTag="button" onClick={handleBackClick} className="flex items-center space-x-2 text-slate-600 hover:text-blue-600 transition-all duration-200 group w-fit" data-magicpath-id="5" data-magicpath-path="ViewPage.tsx">
+          <SortableContainer dndKitId="1792868a-9c85-40d0-a88f-2ec3578c1f5e" containerType="regular" prevTag="div" className="bg-white rounded-2xl shadow-lg border border-slate-200/50 mb-6" data-magicpath-id="2" data-magicpath-path="ViewPage.tsx">
+            <SortableContainer dndKitId="1d1ccb61-1966-44e8-9ac7-0276f79fa942" containerType="regular" prevTag="div" className="p-6 md:p-8" data-magicpath-id="3" data-magicpath-path="ViewPage.tsx">
+              <SortableContainer dndKitId="a247fbb8-63ad-406c-b514-d67241f239d7" containerType="regular" prevTag="div" className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6" data-magicpath-id="4" data-magicpath-path="ViewPage.tsx">
+                <SortableContainer dndKitId="08404d85-cf2e-445b-8eb2-da7cb3753b8b" containerType="regular" prevTag="button" onClick={handleBackClick} className="flex items-center space-x-2 text-slate-600 hover:text-blue-600 transition-all duration-200 group w-fit" data-magicpath-id="5" data-magicpath-path="ViewPage.tsx">
                   <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-200" data-magicpath-id="6" data-magicpath-path="ViewPage.tsx" />
                   <span className="font-medium" data-magicpath-id="7" data-magicpath-path="ViewPage.tsx">Back to Requests</span>
                 </SortableContainer>
                 
-                <SortableContainer dndKitId="c066c9be-2fa9-4161-b88c-36181c8b5c75" containerType="regular" prevTag="button" onClick={handleScoreClick} disabled={!selectedItem} className={`px-6 py-3 rounded-xl transition-all duration-200 font-semibold shadow-lg transform ${selectedItem ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl hover:-translate-y-0.5' : 'bg-slate-200 text-slate-400 cursor-not-allowed'}`} data-magicpath-id="8" data-magicpath-path="ViewPage.tsx">
+                <SortableContainer dndKitId="acff3159-5960-4132-a513-44f7f5f59e68" containerType="regular" prevTag="button" onClick={handleScoreClick} disabled={!selectedItem} className={`px-6 py-3 rounded-xl transition-all duration-200 font-semibold shadow-lg transform ${selectedItem ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl hover:-translate-y-0.5' : 'bg-slate-200 text-slate-400 cursor-not-allowed'}`} data-magicpath-id="8" data-magicpath-path="ViewPage.tsx">
                   <span data-magicpath-id="9" data-magicpath-path="ViewPage.tsx">Score Responses</span>
                 </SortableContainer>
               </SortableContainer>
 
-              <SortableContainer dndKitId="ef462402-4117-48b4-978c-ba7ad813639d" containerType="regular" prevTag="div" className="flex items-start space-x-4 mb-6" data-magicpath-id="10" data-magicpath-path="ViewPage.tsx">
-                <SortableContainer dndKitId="4ff1afc2-6fe3-4a75-8092-d2510fffce13" containerType="regular" prevTag="div" className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg" data-magicpath-id="11" data-magicpath-path="ViewPage.tsx">
+              <SortableContainer dndKitId="16b47756-bef9-442c-ab8a-98331064832c" containerType="regular" prevTag="div" className="flex items-start space-x-4 mb-6" data-magicpath-id="10" data-magicpath-path="ViewPage.tsx">
+                <SortableContainer dndKitId="3c2d5259-914c-494d-8fdb-7c40d7d00540" containerType="regular" prevTag="div" className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg" data-magicpath-id="11" data-magicpath-path="ViewPage.tsx">
                   <FileText className="w-8 h-8 text-white" data-magicpath-id="12" data-magicpath-path="ViewPage.tsx" />
                 </SortableContainer>
-                <SortableContainer dndKitId="c6451fcb-4d93-4176-a66a-868989dfae95" containerType="regular" prevTag="div" className="flex-1" data-magicpath-id="13" data-magicpath-path="ViewPage.tsx">
+                <SortableContainer dndKitId="8b2389d3-9a6c-4609-a8b4-436d72036f56" containerType="regular" prevTag="div" className="flex-1" data-magicpath-id="13" data-magicpath-path="ViewPage.tsx">
                   <h1 className="text-2xl md:text-3xl font-bold text-slate-800 mb-2" data-magicpath-id="14" data-magicpath-path="ViewPage.tsx">
                     {selectedItem.id}
                   </h1>
                   <p className="text-lg text-slate-600 mb-4" data-magicpath-id="15" data-magicpath-path="ViewPage.tsx">
                     {selectedItem.title}
                   </p>
-                  <SortableContainer dndKitId="dd94348a-315b-49a1-95e6-260c1d7fc2ce" containerType="regular" prevTag="div" className="flex flex-wrap items-center gap-3" data-magicpath-id="16" data-magicpath-path="ViewPage.tsx">
+                  <SortableContainer dndKitId="69dfe5c3-4c4d-4f63-8230-5114d9f9ab2a" containerType="regular" prevTag="div" className="flex flex-wrap items-center gap-3" data-magicpath-id="16" data-magicpath-path="ViewPage.tsx">
                     <span className={`inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium border ${getStatusColor(selectedItem.status)}`} data-magicpath-id="17" data-magicpath-path="ViewPage.tsx">
                       <CheckCircle className="w-4 h-4 mr-2" data-magicpath-id="18" data-magicpath-path="ViewPage.tsx" />
                       {selectedItem.status}
@@ -228,41 +228,41 @@ export const ViewPage = ({
               </SortableContainer>
 
               {/* Key Metrics Grid */}
-              <SortableContainer dndKitId="d5509c9e-817f-47b0-aef3-7d655a8a6467" containerType="regular" prevTag="div" className="grid grid-cols-2 md:grid-cols-4 gap-4" data-magicpath-id="21" data-magicpath-path="ViewPage.tsx">
-                <SortableContainer dndKitId="df8097fa-7203-457b-8083-5085be39bc8c" containerType="regular" prevTag="div" className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 border border-blue-200/50" data-magicpath-id="22" data-magicpath-path="ViewPage.tsx">
-                  <SortableContainer dndKitId="0749d48c-59ad-4d97-ba82-57e96fac04a3" containerType="regular" prevTag="div" className="flex items-center space-x-3" data-magicpath-id="23" data-magicpath-path="ViewPage.tsx">
+              <SortableContainer dndKitId="3953aa70-ee31-4d34-a15f-6ca7e95eabc4" containerType="regular" prevTag="div" className="grid grid-cols-2 md:grid-cols-4 gap-4" data-magicpath-id="21" data-magicpath-path="ViewPage.tsx">
+                <SortableContainer dndKitId="5cd449fb-c692-4443-8240-6d0e5c6b1622" containerType="regular" prevTag="div" className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 border border-blue-200/50" data-magicpath-id="22" data-magicpath-path="ViewPage.tsx">
+                  <SortableContainer dndKitId="d9b57374-ba47-4515-b2a2-b88171536482" containerType="regular" prevTag="div" className="flex items-center space-x-3" data-magicpath-id="23" data-magicpath-path="ViewPage.tsx">
                     <Users className="w-8 h-8 text-blue-600" data-magicpath-id="24" data-magicpath-path="ViewPage.tsx" />
-                    <SortableContainer dndKitId="1bfed2d3-1c8d-47ac-a4c5-31c198a73ffd" containerType="regular" prevTag="div" data-magicpath-id="25" data-magicpath-path="ViewPage.tsx">
+                    <SortableContainer dndKitId="19bbcd8d-28d1-4f49-b4fd-f16c813b3513" containerType="regular" prevTag="div" data-magicpath-id="25" data-magicpath-path="ViewPage.tsx">
                       <p className="text-sm text-blue-600 font-medium" data-magicpath-id="26" data-magicpath-path="ViewPage.tsx">Vendors</p>
                       <p className="text-xl font-bold text-blue-800" data-magicpath-id="27" data-magicpath-path="ViewPage.tsx">{selectedItem.vendorCount}</p>
                     </SortableContainer>
                   </SortableContainer>
                 </SortableContainer>
 
-                <SortableContainer dndKitId="a1f3edb8-3fc5-4a04-9b11-f2748fa7f166" containerType="regular" prevTag="div" className="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-xl p-4 border border-emerald-200/50" data-magicpath-id="28" data-magicpath-path="ViewPage.tsx">
-                  <SortableContainer dndKitId="d444852a-83ea-4c45-bb7a-751ef7665521" containerType="regular" prevTag="div" className="flex items-center space-x-3" data-magicpath-id="29" data-magicpath-path="ViewPage.tsx">
+                <SortableContainer dndKitId="40103874-da47-4a30-987d-a4aa7bf50894" containerType="regular" prevTag="div" className="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-xl p-4 border border-emerald-200/50" data-magicpath-id="28" data-magicpath-path="ViewPage.tsx">
+                  <SortableContainer dndKitId="e658534b-57ed-49c6-8e1b-2da986a9590e" containerType="regular" prevTag="div" className="flex items-center space-x-3" data-magicpath-id="29" data-magicpath-path="ViewPage.tsx">
                     <Calendar className="w-8 h-8 text-emerald-600" data-magicpath-id="30" data-magicpath-path="ViewPage.tsx" />
-                    <SortableContainer dndKitId="ac5ea1a2-2275-4fa5-a499-408d6de05201" containerType="regular" prevTag="div" data-magicpath-id="31" data-magicpath-path="ViewPage.tsx">
+                    <SortableContainer dndKitId="808f9bac-b15b-4b17-8bdf-45f98a4c8aa7" containerType="regular" prevTag="div" data-magicpath-id="31" data-magicpath-path="ViewPage.tsx">
                       <p className="text-sm text-emerald-600 font-medium" data-magicpath-id="32" data-magicpath-path="ViewPage.tsx">Timeline</p>
                       <p className="text-lg font-bold text-emerald-800" data-magicpath-id="33" data-magicpath-path="ViewPage.tsx">31 days</p>
                     </SortableContainer>
                   </SortableContainer>
                 </SortableContainer>
 
-                <SortableContainer dndKitId="57181184-f237-4908-bc6b-72c6ca1c84f9" containerType="regular" prevTag="div" className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-xl p-4 border border-amber-200/50" data-magicpath-id="34" data-magicpath-path="ViewPage.tsx">
-                  <SortableContainer dndKitId="e1414214-8ec0-4581-91a8-027fe1dc644d" containerType="regular" prevTag="div" className="flex items-center space-x-3" data-magicpath-id="35" data-magicpath-path="ViewPage.tsx">
+                <SortableContainer dndKitId="ce5224d8-39b7-4fb4-a2eb-9698f9ce38e4" containerType="regular" prevTag="div" className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-xl p-4 border border-amber-200/50" data-magicpath-id="34" data-magicpath-path="ViewPage.tsx">
+                  <SortableContainer dndKitId="cfbf0edf-3dbe-4925-8e8f-77cd568ff665" containerType="regular" prevTag="div" className="flex items-center space-x-3" data-magicpath-id="35" data-magicpath-path="ViewPage.tsx">
                     <MessageSquare className="w-8 h-8 text-amber-600" data-magicpath-id="36" data-magicpath-path="ViewPage.tsx" />
-                    <SortableContainer dndKitId="d3bbdabe-d64d-45d9-a35b-dc21330e6a9d" containerType="regular" prevTag="div" data-magicpath-id="37" data-magicpath-path="ViewPage.tsx">
+                    <SortableContainer dndKitId="e6d7d549-3eea-4285-bc7c-e2b4913841f9" containerType="regular" prevTag="div" data-magicpath-id="37" data-magicpath-path="ViewPage.tsx">
                       <p className="text-sm text-amber-600 font-medium" data-magicpath-id="38" data-magicpath-path="ViewPage.tsx">Responses</p>
                       <p className="text-xl font-bold text-amber-800" data-magicpath-id="39" data-magicpath-path="ViewPage.tsx">12</p>
                     </SortableContainer>
                   </SortableContainer>
                 </SortableContainer>
 
-                <SortableContainer dndKitId="692f9206-e53f-4b53-be96-95ba8a0bc635" containerType="regular" prevTag="div" className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4 border border-purple-200/50" data-magicpath-id="40" data-magicpath-path="ViewPage.tsx">
-                  <SortableContainer dndKitId="306c19fe-24e9-4e87-b9b8-20dde2becff2" containerType="regular" prevTag="div" className="flex items-center space-x-3" data-magicpath-id="41" data-magicpath-path="ViewPage.tsx">
+                <SortableContainer dndKitId="cc7e3dce-f099-41c3-a25e-cbe8a003b5c7" containerType="regular" prevTag="div" className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4 border border-purple-200/50" data-magicpath-id="40" data-magicpath-path="ViewPage.tsx">
+                  <SortableContainer dndKitId="c29b0ded-9ad0-44e5-8341-3667ace5333e" containerType="regular" prevTag="div" className="flex items-center space-x-3" data-magicpath-id="41" data-magicpath-path="ViewPage.tsx">
                     <DollarSign className="w-8 h-8 text-purple-600" data-magicpath-id="42" data-magicpath-path="ViewPage.tsx" />
-                    <SortableContainer dndKitId="9533d6e7-aad7-4998-ab10-59428cf08cf0" containerType="regular" prevTag="div" data-magicpath-id="43" data-magicpath-path="ViewPage.tsx">
+                    <SortableContainer dndKitId="5dd99e00-21a8-4d27-9fdf-b2ba3865455c" containerType="regular" prevTag="div" data-magicpath-id="43" data-magicpath-path="ViewPage.tsx">
                       <p className="text-sm text-purple-600 font-medium" data-magicpath-id="44" data-magicpath-path="ViewPage.tsx">Est. Value</p>
                       <p className="text-xl font-bold text-purple-800" data-magicpath-id="45" data-magicpath-path="ViewPage.tsx">$125K</p>
                     </SortableContainer>
@@ -273,29 +273,29 @@ export const ViewPage = ({
           </SortableContainer>
 
           {/* Main Content Tabs */}
-          <SortableContainer dndKitId="e6b20089-cd46-49eb-8841-9f6ad22706e0" containerType="regular" prevTag="div" className="bg-white rounded-2xl shadow-lg border border-slate-200/50" data-magicpath-id="46" data-magicpath-path="ViewPage.tsx">
-            <SortableContainer dndKitId="d36e2255-83f7-46b5-9104-c6326799f751" containerType="regular" prevTag="div" className="border-b border-slate-200" data-magicpath-id="47" data-magicpath-path="ViewPage.tsx">
-              <SortableContainer dndKitId="b0cb6d36-ce85-40d7-bb1a-66213cf0768c" containerType="collection" prevTag="div" className="flex overflow-x-auto" data-magicpath-id="48" data-magicpath-path="ViewPage.tsx">
+          <SortableContainer dndKitId="07454073-6f64-4755-b271-d6794e221085" containerType="regular" prevTag="div" className="bg-white rounded-2xl shadow-lg border border-slate-200/50" data-magicpath-id="46" data-magicpath-path="ViewPage.tsx">
+            <SortableContainer dndKitId="0c122c99-102a-48b5-82f6-3ec793ff9912" containerType="regular" prevTag="div" className="border-b border-slate-200" data-magicpath-id="47" data-magicpath-path="ViewPage.tsx">
+              <SortableContainer dndKitId="82fde235-c685-4438-8abd-843d039135c6" containerType="collection" prevTag="div" className="flex overflow-x-auto" data-magicpath-id="48" data-magicpath-path="ViewPage.tsx">
                 {[{
                 id: 'overview',
                 label: 'Overview',
                 icon: Eye,
-                mpid: "1f8c88ba-b27b-4612-8829-2b0f037b908d"
+                mpid: "7b87dc9a-58b4-44e1-9837-315b2963665e"
               }, {
                 id: 'vendors',
                 label: 'Vendors',
                 icon: Building2,
-                mpid: "933b3fa5-4c78-4234-84bf-481f5f8b3617"
+                mpid: "a686dae1-3d29-4222-885a-7323f8f66254"
               }, {
                 id: 'questions',
                 label: 'Q&A',
                 icon: MessageSquare,
-                mpid: "1b1a11f8-06e0-4b56-b247-b98138cc22f9"
+                mpid: "140a851c-7221-4cd6-8d76-a9924273c21c"
               }, {
                 id: 'quotations',
                 label: 'Quotations',
                 icon: FileText,
-                mpid: "7bd14097-f4f5-4334-b5b5-914d48d4e4dd"
+                mpid: "0f38ce9c-7efe-417a-90f6-1f088ffe976d"
               }].map(tab => {
                 const Icon = tab.icon;
                 return <button key={tab.id} onClick={() => setActiveTab(tab.id as any)} className={`flex items-center space-x-2 px-6 py-4 font-medium text-sm transition-all duration-200 border-b-2 whitespace-nowrap ${activeTab === tab.id ? 'text-blue-600 border-blue-600 bg-blue-50/50' : 'text-slate-600 border-transparent hover:text-blue-600 hover:bg-slate-50'}`} data-magicpath-uuid={(tab as any)["mpid"] ?? "unsafe"} data-magicpath-id="49" data-magicpath-path="ViewPage.tsx">
@@ -306,36 +306,36 @@ export const ViewPage = ({
               </SortableContainer>
             </SortableContainer>
 
-            <SortableContainer dndKitId="0cf67cd5-1136-429d-b437-2b4982e0a447" containerType="regular" prevTag="div" className="p-6 md:p-8" data-magicpath-id="52" data-magicpath-path="ViewPage.tsx">
+            <SortableContainer dndKitId="1f4722b3-2f89-454d-9844-cb2bd4d3052d" containerType="regular" prevTag="div" className="p-6 md:p-8" data-magicpath-id="52" data-magicpath-path="ViewPage.tsx">
               {/* Overview Tab */}
-              {activeTab === 'overview' && <SortableContainer dndKitId="08e29059-92a4-4f1c-93a3-52623fab42a8" containerType="regular" prevTag="div" className="space-y-8" data-magicpath-id="53" data-magicpath-path="ViewPage.tsx">
-                  <SortableContainer dndKitId="2acac5f2-9a79-41a8-b702-75b71e743ec9" containerType="regular" prevTag="div" data-magicpath-id="54" data-magicpath-path="ViewPage.tsx">
+              {activeTab === 'overview' && <SortableContainer dndKitId="0844eb88-10be-4644-800c-01aef78d63ca" containerType="regular" prevTag="div" className="space-y-8" data-magicpath-id="53" data-magicpath-path="ViewPage.tsx">
+                  <SortableContainer dndKitId="20cdd9c9-5856-4163-b371-af6db7305281" containerType="regular" prevTag="div" data-magicpath-id="54" data-magicpath-path="ViewPage.tsx">
                     <h2 className="text-xl font-semibold text-slate-800 mb-6" data-magicpath-id="55" data-magicpath-path="ViewPage.tsx">Request Details</h2>
-                    <SortableContainer dndKitId="0012306e-bc78-468a-8b52-e48c74797ae6" containerType="regular" prevTag="div" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-magicpath-id="56" data-magicpath-path="ViewPage.tsx">
-                      <SortableContainer dndKitId="7200425e-a1c5-4a9b-a347-6bd23130964d" containerType="regular" prevTag="div" className="bg-slate-50 rounded-xl p-4 border border-slate-200/50" data-magicpath-id="57" data-magicpath-path="ViewPage.tsx">
-                        <SortableContainer dndKitId="4022ec93-2b7c-4402-b3d5-2836f9d9a602" containerType="regular" prevTag="div" className="flex items-center space-x-3" data-magicpath-id="58" data-magicpath-path="ViewPage.tsx">
+                    <SortableContainer dndKitId="220fc757-bb59-4c97-bdcb-a73f342b66bf" containerType="regular" prevTag="div" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-magicpath-id="56" data-magicpath-path="ViewPage.tsx">
+                      <SortableContainer dndKitId="5134ac46-6021-489d-baa3-04a258f49078" containerType="regular" prevTag="div" className="bg-slate-50 rounded-xl p-4 border border-slate-200/50" data-magicpath-id="57" data-magicpath-path="ViewPage.tsx">
+                        <SortableContainer dndKitId="d7318824-2b77-4a91-815a-80695288da3a" containerType="regular" prevTag="div" className="flex items-center space-x-3" data-magicpath-id="58" data-magicpath-path="ViewPage.tsx">
                           <Calendar className="w-6 h-6 text-slate-500" data-magicpath-id="59" data-magicpath-path="ViewPage.tsx" />
-                          <SortableContainer dndKitId="d674b6e1-bda7-433c-9ab7-e5fd4bd65a3e" containerType="regular" prevTag="div" data-magicpath-id="60" data-magicpath-path="ViewPage.tsx">
+                          <SortableContainer dndKitId="b43dd65e-76e1-4d65-9550-1524b2eddb55" containerType="regular" prevTag="div" data-magicpath-id="60" data-magicpath-path="ViewPage.tsx">
                             <p className="text-sm text-slate-500 font-medium" data-magicpath-id="61" data-magicpath-path="ViewPage.tsx">Start Date</p>
                             <p className="text-lg font-semibold text-slate-800" data-magicpath-id="62" data-magicpath-path="ViewPage.tsx">{selectedItem.startDate}</p>
                           </SortableContainer>
                         </SortableContainer>
                       </SortableContainer>
 
-                      <SortableContainer dndKitId="f389799d-3b60-40b2-8612-bf7111ce0121" containerType="regular" prevTag="div" className="bg-slate-50 rounded-xl p-4 border border-slate-200/50" data-magicpath-id="63" data-magicpath-path="ViewPage.tsx">
-                        <SortableContainer dndKitId="17253b29-3776-4ace-8fd7-8b386fa6233d" containerType="regular" prevTag="div" className="flex items-center space-x-3" data-magicpath-id="64" data-magicpath-path="ViewPage.tsx">
+                      <SortableContainer dndKitId="26959b29-8856-4227-b192-2254652108ac" containerType="regular" prevTag="div" className="bg-slate-50 rounded-xl p-4 border border-slate-200/50" data-magicpath-id="63" data-magicpath-path="ViewPage.tsx">
+                        <SortableContainer dndKitId="e7c8693b-9c0a-4d5f-9e12-fc6ae4cd0201" containerType="regular" prevTag="div" className="flex items-center space-x-3" data-magicpath-id="64" data-magicpath-path="ViewPage.tsx">
                           <Clock className="w-6 h-6 text-slate-500" data-magicpath-id="65" data-magicpath-path="ViewPage.tsx" />
-                          <SortableContainer dndKitId="29e2ee39-7e6b-435f-bd2e-3a6dd8a2948a" containerType="regular" prevTag="div" data-magicpath-id="66" data-magicpath-path="ViewPage.tsx">
+                          <SortableContainer dndKitId="625cb4e1-65b4-4099-b136-d3a02a1aec1a" containerType="regular" prevTag="div" data-magicpath-id="66" data-magicpath-path="ViewPage.tsx">
                             <p className="text-sm text-slate-500 font-medium" data-magicpath-id="67" data-magicpath-path="ViewPage.tsx">End Date</p>
                             <p className="text-lg font-semibold text-slate-800" data-magicpath-id="68" data-magicpath-path="ViewPage.tsx">{selectedItem.endDate}</p>
                           </SortableContainer>
                         </SortableContainer>
                       </SortableContainer>
 
-                      <SortableContainer dndKitId="4df3cbe3-b4c7-46be-9ea0-7897b8ef83a4" containerType="regular" prevTag="div" className="bg-slate-50 rounded-xl p-4 border border-slate-200/50" data-magicpath-id="69" data-magicpath-path="ViewPage.tsx">
-                        <SortableContainer dndKitId="918730b9-aa3d-4b45-a981-aac4083ba996" containerType="regular" prevTag="div" className="flex items-center space-x-3" data-magicpath-id="70" data-magicpath-path="ViewPage.tsx">
+                      <SortableContainer dndKitId="7a9b9ac8-3b20-49d5-88c9-792b94cb1237" containerType="regular" prevTag="div" className="bg-slate-50 rounded-xl p-4 border border-slate-200/50" data-magicpath-id="69" data-magicpath-path="ViewPage.tsx">
+                        <SortableContainer dndKitId="debc16ce-594f-4c6a-b2e2-d8e991f88b56" containerType="regular" prevTag="div" className="flex items-center space-x-3" data-magicpath-id="70" data-magicpath-path="ViewPage.tsx">
                           <FileText className="w-6 h-6 text-slate-500" data-magicpath-id="71" data-magicpath-path="ViewPage.tsx" />
-                          <SortableContainer dndKitId="49e370a9-3996-4d92-a09b-0f670e6b4825" containerType="regular" prevTag="div" data-magicpath-id="72" data-magicpath-path="ViewPage.tsx">
+                          <SortableContainer dndKitId="2c478e1c-4342-4928-9860-932beba06228" containerType="regular" prevTag="div" data-magicpath-id="72" data-magicpath-path="ViewPage.tsx">
                             <p className="text-sm text-slate-500 font-medium" data-magicpath-id="73" data-magicpath-path="ViewPage.tsx">Created</p>
                             <p className="text-lg font-semibold text-slate-800" data-magicpath-id="74" data-magicpath-path="ViewPage.tsx">{selectedItem.createdDate}</p>
                           </SortableContainer>
@@ -344,18 +344,18 @@ export const ViewPage = ({
                     </SortableContainer>
                   </SortableContainer>
 
-                  <SortableContainer dndKitId="92265262-a781-4960-b13f-643994e822bb" containerType="regular" prevTag="div" data-magicpath-id="75" data-magicpath-path="ViewPage.tsx">
+                  <SortableContainer dndKitId="5c06bcb7-ab31-4a3b-9db3-63f0e38b5fb0" containerType="regular" prevTag="div" data-magicpath-id="75" data-magicpath-path="ViewPage.tsx">
                     <h3 className="text-lg font-semibold text-slate-800 mb-4" data-magicpath-id="76" data-magicpath-path="ViewPage.tsx">Project Description</h3>
-                    <SortableContainer dndKitId="d9704b88-607d-432e-8baf-2bb844c5337e" containerType="regular" prevTag="div" className="bg-slate-50 rounded-xl p-6 border border-slate-200/50" data-magicpath-id="77" data-magicpath-path="ViewPage.tsx">
+                    <SortableContainer dndKitId="f0bc5a07-feb4-46f3-a6a2-2489801ef3bc" containerType="regular" prevTag="div" className="bg-slate-50 rounded-xl p-6 border border-slate-200/50" data-magicpath-id="77" data-magicpath-path="ViewPage.tsx">
                       <p className="text-slate-700 leading-relaxed" data-magicpath-id="78" data-magicpath-path="ViewPage.tsx">{selectedItem.coverLetter}</p>
                     </SortableContainer>
                   </SortableContainer>
                 </SortableContainer>}
 
               {/* Vendors Tab */}
-              {activeTab === 'vendors' && <SortableContainer dndKitId="6d37de42-5a46-4abf-bebf-491b02f3e8d1" containerType="regular" prevTag="div" className="space-y-6" data-magicpath-id="79" data-magicpath-path="ViewPage.tsx">
+              {activeTab === 'vendors' && <SortableContainer dndKitId="fa94d2c4-f128-4492-8633-fd53d39c27bc" containerType="regular" prevTag="div" className="space-y-6" data-magicpath-id="79" data-magicpath-path="ViewPage.tsx">
                   <h2 className="text-xl font-semibold text-slate-800" data-magicpath-id="80" data-magicpath-path="ViewPage.tsx">Participating Vendors</h2>
-                  <SortableContainer dndKitId="f65f4392-77f3-403c-9d31-869cab6db9d9" containerType="collection" prevTag="div" className="grid grid-cols-1 lg:grid-cols-2 gap-6" data-magicpath-id="81" data-magicpath-path="ViewPage.tsx">
+                  <SortableContainer dndKitId="24c99f9f-e6d9-4011-a627-c958ff86bf97" containerType="collection" prevTag="div" className="grid grid-cols-1 lg:grid-cols-2 gap-6" data-magicpath-id="81" data-magicpath-path="ViewPage.tsx">
                     {currentVendors.map(vendorName => {
                   const vendor = vendorDetails[vendorName as keyof typeof vendorDetails];
                   if (!vendor) return null;
@@ -405,15 +405,15 @@ export const ViewPage = ({
                 </SortableContainer>}
 
               {/* Questions Tab */}
-              {activeTab === 'questions' && <SortableContainer dndKitId="6c2d1e51-4c4a-4524-9a5d-3afff1c79be4" containerType="regular" prevTag="div" className="space-y-6" data-magicpath-id="108" data-magicpath-path="ViewPage.tsx">
-                  <SortableContainer dndKitId="c2c36ac0-1f53-4fed-bebe-098a394ee32b" containerType="regular" prevTag="div" className="flex items-center justify-between" data-magicpath-id="109" data-magicpath-path="ViewPage.tsx">
+              {activeTab === 'questions' && <SortableContainer dndKitId="5a7277a0-7ea1-4019-b319-214a491f211b" containerType="regular" prevTag="div" className="space-y-6" data-magicpath-id="108" data-magicpath-path="ViewPage.tsx">
+                  <SortableContainer dndKitId="e69ae673-5067-4b78-a04d-1866f0798780" containerType="regular" prevTag="div" className="flex items-center justify-between" data-magicpath-id="109" data-magicpath-path="ViewPage.tsx">
                     <h2 className="text-xl font-semibold text-slate-800" data-magicpath-id="110" data-magicpath-path="ViewPage.tsx">Vendor Questions & Responses</h2>
                     <span className="text-sm text-slate-500 bg-slate-100 px-3 py-1 rounded-full" data-magicpath-id="111" data-magicpath-path="ViewPage.tsx">
                       {sampleQuestions.length} questions
                     </span>
                   </SortableContainer>
                   
-                  <SortableContainer dndKitId="f1b12496-0b22-49ce-94a1-f0d6dc9dfe24" containerType="collection" prevTag="div" className="space-y-4" data-magicpath-id="112" data-magicpath-path="ViewPage.tsx">
+                  <SortableContainer dndKitId="2a20074c-430c-4f83-ba12-d9ae227d7e5d" containerType="collection" prevTag="div" className="space-y-4" data-magicpath-id="112" data-magicpath-path="ViewPage.tsx">
                     {sampleQuestions.map(question => <div key={question.id} className="bg-gradient-to-r from-slate-50 to-blue-50/30 rounded-xl p-6 border border-slate-200/50 hover:shadow-md transition-all duration-200" data-magicpath-uuid={(question as any)["mpid"] ?? "unsafe"} data-magicpath-id="113" data-magicpath-path="ViewPage.tsx">
                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4" data-magicpath-uuid={(question as any)["mpid"] ?? "unsafe"} data-magicpath-id="114" data-magicpath-path="ViewPage.tsx">
                           <div className="flex items-center space-x-3" data-magicpath-uuid={(question as any)["mpid"] ?? "unsafe"} data-magicpath-id="115" data-magicpath-path="ViewPage.tsx">
@@ -456,15 +456,15 @@ export const ViewPage = ({
                 </SortableContainer>}
 
               {/* Quotations Tab */}
-              {activeTab === 'quotations' && <SortableContainer dndKitId="f5ae53ca-ace0-4049-be1d-aab34550ded6" containerType="regular" prevTag="div" className="space-y-6" data-magicpath-id="133" data-magicpath-path="ViewPage.tsx">
-                  <SortableContainer dndKitId="35d4a086-d761-4c6c-8b0b-9249e6dd886b" containerType="regular" prevTag="div" className="flex items-center justify-between" data-magicpath-id="134" data-magicpath-path="ViewPage.tsx">
+              {activeTab === 'quotations' && <SortableContainer dndKitId="49a299ba-819b-445e-93cb-ad95c5fcef66" containerType="regular" prevTag="div" className="space-y-6" data-magicpath-id="133" data-magicpath-path="ViewPage.tsx">
+                  <SortableContainer dndKitId="bff2261a-c7cf-4b15-8b73-6b2c3d60d68e" containerType="regular" prevTag="div" className="flex items-center justify-between" data-magicpath-id="134" data-magicpath-path="ViewPage.tsx">
                     <h2 className="text-xl font-semibold text-slate-800" data-magicpath-id="135" data-magicpath-path="ViewPage.tsx">Submitted Quotations</h2>
                     <span className="text-sm text-slate-500 bg-slate-100 px-3 py-1 rounded-full" data-magicpath-id="136" data-magicpath-path="ViewPage.tsx">
                       {sampleQuotations.length} submissions
                     </span>
                   </SortableContainer>
                   
-                  <SortableContainer dndKitId="974ed421-5cd1-4745-a7ff-f7c16403b0db" containerType="collection" prevTag="div" className="space-y-4" data-magicpath-id="137" data-magicpath-path="ViewPage.tsx">
+                  <SortableContainer dndKitId="ad427759-41d2-4124-a314-8a09d1b8a73c" containerType="collection" prevTag="div" className="space-y-4" data-magicpath-id="137" data-magicpath-path="ViewPage.tsx">
                     {sampleQuotations.map(quotation => <div key={quotation.id} className="bg-gradient-to-r from-white to-slate-50/50 rounded-xl p-6 border border-slate-200/50 hover:shadow-lg transition-all duration-200" data-magicpath-uuid={(quotation as any)["mpid"] ?? "unsafe"} data-magicpath-id="138" data-magicpath-path="ViewPage.tsx">
                         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-4" data-magicpath-uuid={(quotation as any)["mpid"] ?? "unsafe"} data-magicpath-id="139" data-magicpath-path="ViewPage.tsx">
                           <div className="flex items-center space-x-4" data-magicpath-uuid={(quotation as any)["mpid"] ?? "unsafe"} data-magicpath-id="140" data-magicpath-path="ViewPage.tsx">
@@ -527,15 +527,15 @@ export const ViewPage = ({
   }
 
   // Main list view with enhanced sample data
-  return <SortableContainer dndKitId="4946015a-92ce-4b2a-82a9-aa8f799a71d5" containerType="regular" prevTag="div" className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6" data-magicpath-id="169" data-magicpath-path="ViewPage.tsx">
-      <SortableContainer dndKitId="df4439cf-a931-4442-8820-021b8ef18d43" containerType="regular" prevTag="div" className="max-w-7xl mx-auto" data-magicpath-id="170" data-magicpath-path="ViewPage.tsx">
-        <SortableContainer dndKitId="7f808f2b-362e-4e03-aa52-0e954615d82d" containerType="regular" prevTag="div" className="bg-white rounded-2xl shadow-lg border border-slate-200/50 overflow-hidden" data-magicpath-id="171" data-magicpath-path="ViewPage.tsx">
-          <SortableContainer dndKitId="bc7a4f28-d749-41c5-8821-da0fb219f099" containerType="regular" prevTag="div" className="bg-gradient-to-r from-slate-800 to-slate-900 p-6 md:p-8" data-magicpath-id="172" data-magicpath-path="ViewPage.tsx">
-            <SortableContainer dndKitId="7ba7a3e3-4895-4a97-b301-6ea7a06b6c7a" containerType="regular" prevTag="div" className="flex items-center space-x-4" data-magicpath-id="173" data-magicpath-path="ViewPage.tsx">
-              <SortableContainer dndKitId="05227310-ba8f-4fea-9c86-ef31d7305e3b" containerType="regular" prevTag="div" className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-sm" data-magicpath-id="174" data-magicpath-path="ViewPage.tsx">
+  return <SortableContainer dndKitId="f6858180-4bdc-436d-9d85-d745622a33d9" containerType="regular" prevTag="div" className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6" data-magicpath-id="169" data-magicpath-path="ViewPage.tsx">
+      <SortableContainer dndKitId="ad49ac4f-18a5-42d9-8901-d1ee1ebfa89d" containerType="regular" prevTag="div" className="max-w-7xl mx-auto" data-magicpath-id="170" data-magicpath-path="ViewPage.tsx">
+        <SortableContainer dndKitId="6239f3ed-8893-4b63-96fa-a66dee649190" containerType="regular" prevTag="div" className="bg-white rounded-2xl shadow-lg border border-slate-200/50 overflow-hidden" data-magicpath-id="171" data-magicpath-path="ViewPage.tsx">
+          <SortableContainer dndKitId="ddb9e7b2-ba9c-42fe-b7b7-16548221289c" containerType="regular" prevTag="div" className="bg-gradient-to-r from-slate-800 to-slate-900 p-6 md:p-8" data-magicpath-id="172" data-magicpath-path="ViewPage.tsx">
+            <SortableContainer dndKitId="8a8eb0e0-5904-452f-8a96-658a74c9b1aa" containerType="regular" prevTag="div" className="flex items-center space-x-4" data-magicpath-id="173" data-magicpath-path="ViewPage.tsx">
+              <SortableContainer dndKitId="5592d76a-d4ec-47cb-a01f-9cd842f5fdad" containerType="regular" prevTag="div" className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-sm" data-magicpath-id="174" data-magicpath-path="ViewPage.tsx">
                 <Eye className="w-6 h-6 text-white" data-magicpath-id="175" data-magicpath-path="ViewPage.tsx" />
               </SortableContainer>
-              <SortableContainer dndKitId="7215414c-dc88-491a-98f0-d480ccb74857" containerType="regular" prevTag="div" data-magicpath-id="176" data-magicpath-path="ViewPage.tsx">
+              <SortableContainer dndKitId="ea8a9c5d-b2d7-4220-88e1-d3e614cb732b" containerType="regular" prevTag="div" data-magicpath-id="176" data-magicpath-path="ViewPage.tsx">
                 <h1 className="text-2xl md:text-3xl font-bold text-white mb-1" data-magicpath-id="177" data-magicpath-path="ViewPage.tsx">
                   Active Procurement Requests
                 </h1>
@@ -546,9 +546,9 @@ export const ViewPage = ({
             </SortableContainer>
           </SortableContainer>
 
-          <SortableContainer dndKitId="16cfd4db-3047-4a9f-ab1c-b38c9fa081d9" containerType="regular" prevTag="div" className="p-6 md:p-8" data-magicpath-id="179" data-magicpath-path="ViewPage.tsx">
-            {displayData.length === 0 ? <SortableContainer dndKitId="e620b476-7a58-4cf8-be73-74e23d4a70f0" containerType="regular" prevTag="div" className="text-center py-16" data-magicpath-id="180" data-magicpath-path="ViewPage.tsx">
-                <SortableContainer dndKitId="d8fcf3f9-6f6a-4cb9-a125-5919324c4738" containerType="regular" prevTag="div" className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6" data-magicpath-id="181" data-magicpath-path="ViewPage.tsx">
+          <SortableContainer dndKitId="15d4bd7b-452f-4d2e-88d1-34857a1f638e" containerType="regular" prevTag="div" className="p-6 md:p-8" data-magicpath-id="179" data-magicpath-path="ViewPage.tsx">
+            {displayData.length === 0 ? <SortableContainer dndKitId="5adafa39-64e6-4ba3-8bd7-d23a9c2caf77" containerType="regular" prevTag="div" className="text-center py-16" data-magicpath-id="180" data-magicpath-path="ViewPage.tsx">
+                <SortableContainer dndKitId="78a2d0f1-0287-4b6b-ad18-95baf5fa46d4" containerType="regular" prevTag="div" className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6" data-magicpath-id="181" data-magicpath-path="ViewPage.tsx">
                   <FileText className="w-10 h-10 text-slate-400" data-magicpath-id="182" data-magicpath-path="ViewPage.tsx" />
                 </SortableContainer>
                 <h3 className="text-xl font-semibold text-slate-600 mb-3" data-magicpath-id="183" data-magicpath-path="ViewPage.tsx">
@@ -557,7 +557,7 @@ export const ViewPage = ({
                 <p className="text-slate-500 max-w-md mx-auto" data-magicpath-id="184" data-magicpath-path="ViewPage.tsx">
                   Create your first RFI or RFQ to start the procurement process and manage vendor responses.
                 </p>
-              </SortableContainer> : <SortableContainer dndKitId="0f2983e5-2494-488e-954c-e950e9551dd7" containerType="regular" prevTag="div" className="overflow-x-auto" data-magicpath-id="185" data-magicpath-path="ViewPage.tsx">
+              </SortableContainer> : <SortableContainer dndKitId="b2c07c7b-f3bf-4000-9529-579d4b7095db" containerType="regular" prevTag="div" className="overflow-x-auto" data-magicpath-id="185" data-magicpath-path="ViewPage.tsx">
                 <table className="w-full" data-magicpath-id="186" data-magicpath-path="ViewPage.tsx">
                   <thead data-magicpath-id="187" data-magicpath-path="ViewPage.tsx">
                     <tr className="border-b border-slate-200" data-magicpath-id="188" data-magicpath-path="ViewPage.tsx">
