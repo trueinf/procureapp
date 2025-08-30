@@ -12,7 +12,7 @@ export const InitiatePage = ({
   const [formData, setFormData] = useState({
     type: 'RFQ' as 'RFI' | 'RFQ',
     title: '',
-    vendorCount: 3,
+    vendorCount: 1,
     startDate: '',
     endDate: '',
     coverLetter: '',
@@ -51,7 +51,7 @@ export const InitiatePage = ({
     setFormData({
       type: 'RFQ',
       title: '',
-      vendorCount: 3,
+      vendorCount: 1,
       startDate: '',
       endDate: '',
       coverLetter: '',
@@ -98,7 +98,7 @@ export const InitiatePage = ({
                 ...prev,
                 vendorCount: parseInt(e.target.value)
               }))} className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                  {[3, 5, 7, 10].map(num => <option key={num} value={num}>{num} vendors</option>)}
+                  {[1, 3, 5, 7, 10].map(num => <option key={num} value={num}>{num} vendor{num === 1 ? '' : 's'}</option>)}
                 </select>
               </div>
             </div>
