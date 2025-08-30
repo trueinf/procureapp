@@ -5,6 +5,10 @@
 [build.environment]
   NODE_VERSION = "18"
 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
@@ -12,4 +16,4 @@
 
 [dev]
   command = "npm run dev"
-  port = 5173
+  port = 8888
