@@ -657,9 +657,8 @@ export const InitiatePage = ({
                     </div>
                     <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
                       <div
-                        className={`${totalCriteriaWeight === 100 ? 'bg-green-500' : totalCriteriaWeight > 100 ? 'bg-red-500' : 'bg-amber-500'}`}
+                        className={`h-2 ${totalCriteriaWeight === 100 ? 'bg-green-500' : totalCriteriaWeight > 100 ? 'bg-red-500' : 'bg-amber-500'}`}
                         style={{ width: `${Math.min(totalCriteriaWeight, 100)}%` }}
-                        className="h-2"
                       />
                     </div>
                     {!criteriaValid && (
