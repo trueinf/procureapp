@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationTab } from './ProcureApp';
-import { FileText, Eye, BarChart3, Award } from 'lucide-react';
+import { FileText, Eye, BarChart3, Award, Users, ChevronDown } from 'lucide-react';
 interface TopNavBarProps {
   activeTab: NavigationTab;
   onTabChange: (tab: NavigationTab) => void;
@@ -12,6 +12,16 @@ export const TopNavBar = ({
   onTabChange
 }: TopNavBarProps) => {
   const navItems = [{
+    id: 'suppliers' as NavigationTab,
+    label: 'Suppliers',
+    icon: Users,
+    description: 'Browse supplier directory',
+    submenu: [
+      { id: 'suppliers-segmentation' as NavigationTab, label: 'Supplier Segmentation' },
+      { id: 'suppliers-recommendation' as NavigationTab, label: 'Supplier Recommendation' },
+      { id: 'suppliers-heatmap' as NavigationTab, label: 'Heatmap' },
+    ]
+  }, {
     id: 'initiate' as NavigationTab,
     label: 'Initiate',
     icon: FileText,
@@ -52,17 +62,19 @@ export const TopNavBar = ({
             {navItems.map(item => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
-            return <button key={item.id} onClick={() => onTabChange(item.id)} className={`
-                    relative px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300
-                    flex items-center space-x-2 group backdrop-blur-sm
-                    ${isActive ? 'bg-white text-navy-800 shadow-xl transform scale-105' : 'text-blue-100 hover:text-white hover:bg-white/10 hover:backdrop-blur-md'}
-                  `} style={isActive ? {
+            return <div key={item.id} className="relative group">
+                <button onClick={() => onTabChange(item.id)} className={`
+                     relative px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300
+                    flex items-center space-x-2 backdrop-blur-sm
+                     ${isActive ? 'bg-white text-navy-800 shadow-xl transform scale-105' : 'text-blue-100 hover:text-white hover:bg-white/10 hover:backdrop-blur-md'}
+                   `} style={isActive ? {
               color: '#1e293b'
             } : {}}>
                   <Icon className={`w-5 h-5 transition-colors duration-300 ${isActive ? 'text-navy-700' : 'text-blue-200 group-hover:text-white'}`} style={isActive ? {
                 color: '#334155'
               } : {}} />
                   <span>{item.label}</span>
+                  {item.submenu && <ChevronDown className="w-4 h-4 ml-1 text-blue-200 group-hover:text-white" />}
                   
                   {!isActive && <div className="absolute -bottom-14 left-1/2 transform -translate-x-1/2 bg-navy-900 text-blue-100 text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-10 shadow-xl" style={{
                 backgroundColor: '#0f172a'
@@ -72,7 +84,21 @@ export const TopNavBar = ({
                   backgroundColor: '#0f172a'
                 }}></div>
                     </div>}
-                </button>;
+                </button>
+                {item.submenu && (
+                  <div className="absolute left-0 mt-2 hidden group-hover:block bg-white text-slate-800 rounded-xl shadow-xl border z-20 min-w-[220px]">
+                    {item.submenu.map((sub: any) => (
+                      <button
+                        key={sub.id}
+                        onClick={() => onTabChange(sub.id)}
+                        className={`w-full text-left px-4 py-2 text-sm hover:bg-slate-100 rounded-xl ${activeTab === sub.id ? 'font-semibold text-blue-700' : ''}`}
+                      >
+                        {sub.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>;
           })}
           </div>
         </div>

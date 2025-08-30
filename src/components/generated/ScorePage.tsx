@@ -17,6 +17,8 @@ interface VendorScore {
   aiRecommendation: string;
   strengths: string[];
   weaknesses: string[];
+  criteriaTotal?: number;
+  criteriaBreakdown?: Array<{ name: string; weight: number; score: number }>;
 }
 
 // @component: ScorePage
@@ -80,14 +82,14 @@ export const ScorePage = ({
 
     // Use the vendors from the RFI/RFQ data
     const vendors = rfirfq.vendors || ['TechCorp Solutions', 'Digital Innovations', 'CloudTech Partners'];
-    return vendors.slice(0, 3).map((vendorName, index) => ({
+    return vendors.slice(0, Math.max(3, vendors.length)).map((vendorName, index) => ({
       id: (index + 1).toString(),
       vendorName,
       score: 0,
       technicalScore: 80 + Math.floor(Math.random() * 15),
       commercialScore: 75 + Math.floor(Math.random() * 20),
       complianceScore: 85 + Math.floor(Math.random() * 10),
-      documentName: `${vendorName.replace(/\s+/g, '_')}_Proposal_2024.pdf`,
+      documentName: `${(rfirfq.title || 'Proposal').replace(/\s+/g, '_')}_${vendorName.replace(/\s+/g, '_')}.pdf`,
       aiRecommendation: `Strong capabilities with competitive approach. ${vendorName} offers excellent value for this procurement.`,
       strengths: ['Advanced technical expertise', 'Strong compliance history', 'Proven track record', 'Competitive pricing model', 'Excellent customer support'].slice(0, 3 + Math.floor(Math.random() * 2)),
       weaknesses: ['Higher pricing than some competitors', 'Limited local presence', 'Longer implementation timeline', 'Requires additional training'].slice(0, 2 + Math.floor(Math.random() * 2)),
@@ -100,10 +102,41 @@ export const ScorePage = ({
     setTimeout(() => {
       const vendor = dynamicMockVendorData.find(v => v.id === vendorId);
       if (vendor) {
-        const overallScore = Math.round((vendor.technicalScore + vendor.commercialScore + vendor.complianceScore) / 3);
-        const scoredVendor = {
+        // If user provided scoring criteria, compute weighted total based on them
+        let criteriaBreakdown: Array<{ name: string; weight: number; score: number }> | undefined;
+        let criteriaTotal: number | undefined;
+        const crit = (currentRFIRFQ?.scoringCriteria || []).filter(c => c && typeof c.weight === 'number' && c.weight > 0);
+        const sumWeights = crit.reduce((s, c) => s + (Number(c.weight) || 0), 0);
+        if (crit.length > 0 && sumWeights > 0) {
+          criteriaBreakdown = crit.map(c => ({
+            name: c.criterion,
+            weight: c.weight,
+            // generate a stable-ish score per vendor/criterion between 70-95
+            score: 70 + ((Math.abs(hashCode(`${vendor.vendorName}-${c.criterion}`)) % 26))
+          }));
+          const total = criteriaBreakdown.reduce((acc, c) => acc + (c.score * (c.weight / sumWeights)), 0);
+          criteriaTotal = Math.round(total);
+        }
+
+        const overallScore = criteriaTotal !== undefined
+          ? criteriaTotal
+          : Math.round((vendor.technicalScore + vendor.commercialScore + vendor.complianceScore) / 3);
+
+        // Tailor recommendation using title and top criterion if available
+        const topCriterion = criteriaBreakdown && criteriaBreakdown.length > 0
+          ? [...criteriaBreakdown].sort((a, b) => b.weight - a.weight)[0]
+          : null;
+        const title = currentRFIRFQ?.title || 'this request';
+        const recommendation = topCriterion
+          ? `${vendor.vendorName} aligns strongly with ${title}, particularly on "${topCriterion.name}".`
+          : `Based on proposal fit for ${title}, ${vendor.vendorName} presents a strong option.`;
+
+        const scoredVendor: VendorScore = {
           ...vendor,
-          score: overallScore
+          score: overallScore,
+          criteriaTotal,
+          criteriaBreakdown,
+          aiRecommendation: recommendation
         };
         setVendorScores(prev => {
           const existing = prev.find(v => v.id === vendorId);
@@ -116,6 +149,15 @@ export const ScorePage = ({
       setIsScoring(null);
     }, 2000);
   };
+
+  // Simple string hash for stable pseudo-randomness
+  function hashCode(str: string): number {
+    let h = 0;
+    for (let i = 0; i < str.length; i++) {
+      h = (Math.imul(31, h) + str.charCodeAt(i)) | 0;
+    }
+    return h;
+  }
   const handleCompareAll = () => {
     setShowComparison(true);
   };
@@ -220,6 +262,25 @@ export const ScorePage = ({
                     width: `${scoredVendor.complianceScore}%`
                   }}></div>
                       </div>
+
+                      {scoredVendor.criteriaBreakdown && (
+                        <div className="bg-white rounded-lg p-3 border border-slate-200/70 mt-4">
+                          <div className="text-sm font-medium text-slate-800 mb-2">Criteria Breakdown</div>
+                          <div className="space-y-2">
+                            {scoredVendor.criteriaBreakdown.map((c, i) => (
+                              <div key={i}>
+                                <div className="flex items-center justify-between text-xs">
+                                  <span className="text-slate-600">{c.name}</span>
+                                  <span className="text-slate-600">{c.score}/100 • {c.weight}%</span>
+                                </div>
+                                <div className="w-full bg-slate-200 rounded-full h-1.5">
+                                  <div className="bg-sky-600 h-1.5 rounded-full" style={{ width: `${c.score}%` }}></div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
 
                       <div className="bg-blue-50 rounded-lg p-3 mt-4">
                         <div className="flex items-center space-x-2 mb-2">
@@ -492,6 +553,26 @@ export const ScorePage = ({
                             </ul>
                           </div>
                         </div>
+
+                        {/* Criteria Breakdown (if provided) */}
+                        {vendor.criteriaBreakdown && (
+                          <div className="bg-white rounded-lg p-4 border border-slate-200">
+                            <h5 className="font-semibold text-slate-800 mb-2">Scoring Criteria Breakdown</h5>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                              {vendor.criteriaBreakdown.map((c, i) => (
+                                <div key={i}>
+                                  <div className="flex items-center justify-between text-xs">
+                                    <span className="text-slate-600">{c.name}</span>
+                                    <span className="text-slate-600">{c.score}/100 • {c.weight}%</span>
+                                  </div>
+                                  <div className="w-full bg-slate-200 rounded-full h-1.5">
+                                    <div className="bg-sky-600 h-1.5 rounded-full" style={{ width: `${c.score}%` }}></div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
 
                         {/* AI Recommendation for this vendor */}
                         <div className="bg-blue-50 rounded-lg p-4">

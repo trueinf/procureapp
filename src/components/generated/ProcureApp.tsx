@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TopNavBar } from './TopNavBar';
 import { InitiatePage } from './InitiatePage';
 import { ViewPage } from './ViewPage';
 import { ScorePage } from './ScorePage';
-export type NavigationTab = 'initiate' | 'view' | 'score' | 'award';
+import { CheckCircle } from 'lucide-react';
+import { SuppliersPage } from './SuppliersPage';
+export type NavigationTab =
+  | 'suppliers'
+  | 'suppliers-segmentation'
+  | 'suppliers-recommendation'
+  | 'suppliers-heatmap'
+  | 'initiate'
+  | 'view'
+  | 'score'
+  | 'award';
 export interface RFIRFQData {
   id: string;
   type: 'RFI' | 'RFQ';
@@ -16,6 +26,26 @@ export interface RFIRFQData {
   documents: File[];
   coverLetter: string;
   vendors: string[];
+  scoringCriteria?: Array<{ criterion: string; weight: number }>;
+  // Additional fields captured on Initiate
+  businessUnit?: string;
+  owner?: string;
+  supplierEligibility?: string[];
+  serviceCategory?: string;
+  requiredSkills?: string[];
+  teamSize?: string;
+  workLocation?: string;
+  expectedOutputs?: string;
+  startDateMilestones?: string;
+  toolPreferences?: string[];
+  pricingModel?: string;
+  budgetEstimate?: string;
+  paymentTerms?: string;
+  responseDeadline?: string;
+  bidValidity?: string;
+  ndaRequired?: boolean;
+  approvers?: string[];
+  internalNotes?: string;
 }
 export interface VendorResponse {
   id: string;
@@ -38,6 +68,29 @@ export const ProcureApp = () => {
   const [vendorResponses, setVendorResponses] = useState<VendorResponse[]>([]);
   const [selectedRFIRFQ, setSelectedRFIRFQ] = useState<string | null>(null);
   const [awardedVendor, setAwardedVendor] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+
+  // Load persisted requests
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('rfirfqData');
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) setRfirfqData(parsed);
+      }
+    } catch {}
+  }, []);
+
+  // Persist requests (omit File objects for safety)
+  useEffect(() => {
+    try {
+      const sanitized = rfirfqData.map((item) => ({
+        ...item,
+        documents: [],
+      }));
+      localStorage.setItem('rfirfqData', JSON.stringify(sanitized));
+    } catch {}
+  }, [rfirfqData]);
   const handleCreateRFIRFQ = (data: Omit<RFIRFQData, 'id' | 'status' | 'createdDate'>) => {
     const newRFIRFQ: RFIRFQData = {
       ...data,
@@ -46,6 +99,9 @@ export const ProcureApp = () => {
       createdDate: new Date().toISOString().split('T')[0]
     };
     setRfirfqData(prev => [...prev, newRFIRFQ]);
+    const vendorCount = data.vendorCount ?? (data.vendors ? data.vendors.length : 0);
+    setNotice(`Request "${data.title}" sent to ${vendorCount || 1} vendor${(vendorCount || 1) === 1 ? '' : 's'}. Status: Sent`);
+    setTimeout(() => setNotice(null), 3000);
     setActiveTab('view');
   };
   const handleSelectRFIRFQ = (id: string) => {
@@ -113,6 +169,13 @@ export const ProcureApp = () => {
   return <div className="min-h-screen bg-slate-50">
       <TopNavBar activeTab={activeTab} onTabChange={setActiveTab} />
       
+      {(activeTab === 'suppliers' || activeTab === 'suppliers-segmentation' || activeTab === 'suppliers-recommendation' || activeTab === 'suppliers-heatmap') && (
+        <SuppliersPage
+          rfirfqData={rfirfqData}
+          view={activeTab === 'suppliers' ? 'segmentation' : (activeTab.replace('suppliers-', '') as 'segmentation'|'recommendation'|'heatmap')}
+        />
+      )}
+
       {activeTab === 'initiate' && <InitiatePage onCreateRFIRFQ={handleCreateRFIRFQ} />}
       
       {activeTab === 'view' && <ViewPage rfirfqData={rfirfqData} onSelectRFIRFQ={handleSelectRFIRFQ} />}
@@ -120,5 +183,12 @@ export const ProcureApp = () => {
       {activeTab === 'score' && <ScorePage selectedRFIRFQ={selectedRFIRFQ} rfirfqData={rfirfqData} onAwardVendor={handleAwardVendor} />}
       
       {activeTab === 'award' && renderAwardPage()}
+
+      {notice && (
+        <div className="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center space-x-2 z-50">
+          <CheckCircle className="w-5 h-5" />
+          <span>{notice}</span>
+        </div>
+      )}
     </div>;
 };

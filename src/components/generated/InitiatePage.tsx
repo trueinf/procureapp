@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { RFIRFQData } from './ProcureApp';
-import { Upload, Calendar, Users, FileText, Send, CheckCircle, Building2, User, Target, DollarSign, ClipboardCheck, Workflow, ChevronDown, Plus, X } from 'lucide-react';
+import { Upload, Calendar, Users, FileText, Send, CheckCircle, Building2, User, Target, DollarSign, ClipboardCheck, Workflow, ChevronDown, Plus, X, Pencil, Check } from 'lucide-react';
 interface InitiatePageProps {
   onCreateRFIRFQ: (data: Omit<RFIRFQData, 'id' | 'status' | 'createdDate'>) => void;
 }
@@ -58,12 +58,15 @@ export const InitiatePage = ({
     documents: [] as File[]
   });
   
-  const [showSuccess, setShowSuccess] = useState(false);
+  // success toast moved to parent (ProcureApp) for cross-tab visibility
   const [supplierInput, setSupplierInput] = useState('');
   const [skillInput, setSkillInput] = useState('');
   const [toolInput, setToolInput] = useState('');
   const [approverInput, setApproverInput] = useState('');
   const [criterionInput, setCriterionInput] = useState({ criterion: '', weight: 0 });
+  const [criteriaError, setCriteriaError] = useState<string | null>(null);
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const [editingValue, setEditingValue] = useState<{ criterion: string; weight: number }>({ criterion: '', weight: 0 });
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files || []);
     setFormData(prev => ({
@@ -148,6 +151,7 @@ export const InitiatePage = ({
         scoringCriteria: [...prev.scoringCriteria, criterionInput]
       }));
       setCriterionInput({ criterion: '', weight: 0 });
+      setCriteriaError(null);
     }
   };
 
@@ -156,9 +160,42 @@ export const InitiatePage = ({
       ...prev,
       scoringCriteria: prev.scoringCriteria.filter((_, i) => i !== index)
     }));
+    setCriteriaError(null);
   };
+
+  const startEditCriterion = (index: number) => {
+    setEditingIndex(index);
+    setEditingValue(formData.scoringCriteria[index]);
+  };
+
+  const saveEditCriterion = () => {
+    if (editingIndex === null) return;
+    if (!editingValue.criterion.trim() || editingValue.weight <= 0) return;
+    setFormData(prev => ({
+      ...prev,
+      scoringCriteria: prev.scoringCriteria.map((c, i) => (i === editingIndex ? editingValue : c))
+    }));
+    setEditingIndex(null);
+    setCriteriaError(null);
+  };
+
+  const cancelEditCriterion = () => {
+    setEditingIndex(null);
+    setEditingValue({ criterion: '', weight: 0 });
+  };
+
+  const totalCriteriaWeight = useMemo(
+    () => formData.scoringCriteria.reduce((sum, c) => sum + (Number(c.weight) || 0), 0),
+    [formData.scoringCriteria]
+  );
+
+  const criteriaValid = formData.scoringCriteria.length === 0 || totalCriteriaWeight === 100;
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!criteriaValid) {
+      setCriteriaError('Total scoring weight must equal 100%.');
+      return;
+    }
     
     // Map new form data to legacy format for compatibility
     const legacyData = {
@@ -169,13 +206,29 @@ export const InitiatePage = ({
       endDate: formData.engagementDuration.end,
       coverLetter: formData.description,
       vendors: formData.supplierList,
-      documents: formData.documents
+      documents: formData.documents,
+      scoringCriteria: formData.scoringCriteria,
+      businessUnit: formData.businessUnit,
+      owner: formData.owner,
+      supplierEligibility: formData.supplierEligibility,
+      serviceCategory: formData.serviceCategory,
+      requiredSkills: formData.requiredSkills,
+      teamSize: formData.teamSize,
+      workLocation: formData.workLocation,
+      expectedOutputs: formData.expectedOutputs,
+      startDateMilestones: formData.startDateMilestones,
+      toolPreferences: formData.toolPreferences,
+      pricingModel: formData.pricingModel,
+      budgetEstimate: formData.budgetEstimate,
+      paymentTerms: formData.paymentTerms,
+      responseDeadline: formData.responseDeadline,
+      bidValidity: formData.bidValidity,
+      ndaRequired: formData.ndaRequired,
+      approvers: formData.approvers,
+      internalNotes: formData.internalNotes
     };
     
     onCreateRFIRFQ(legacyData);
-    setShowSuccess(true);
-    setTimeout(() => setShowSuccess(false), 3000);
-    
     // Reset form
     setFormData({
       documentType: 'RFQ',
@@ -595,18 +648,71 @@ export const InitiatePage = ({
                       <Plus className="w-5 h-5" />
                     </button>
                   </div>
+                  <div className="mb-3">
+                    <div className="flex items-center justify-between text-xs mb-1">
+                      <span className="text-slate-600">Total Weight</span>
+                      <span className={totalCriteriaWeight === 100 ? 'text-green-600 font-semibold' : totalCriteriaWeight > 100 ? 'text-red-600 font-semibold' : 'text-amber-600 font-semibold'}>
+                        {totalCriteriaWeight}%
+                      </span>
+                    </div>
+                    <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+                      <div
+                        className={`${totalCriteriaWeight === 100 ? 'bg-green-500' : totalCriteriaWeight > 100 ? 'bg-red-500' : 'bg-amber-500'}`}
+                        style={{ width: `${Math.min(totalCriteriaWeight, 100)}%` }}
+                        className="h-2"
+                      />
+                    </div>
+                    {!criteriaValid && (
+                      <div className="mt-2 text-xs text-red-600">Total must equal 100% to submit.</div>
+                    )}
+                  </div>
                   <div className="space-y-2">
-                    {formData.scoringCriteria.map((criterion, index) => 
+                    {formData.scoringCriteria.map((criterion, index) => (
                       <div key={index} className="flex items-center justify-between p-3 bg-white rounded-lg border">
-                        <span className="text-sm text-slate-700">{criterion.criterion}</span>
+                        {editingIndex === index ? (
+                          <div className="flex-1 flex items-center gap-2">
+                            <input
+                              type="text"
+                              value={editingValue.criterion}
+                              onChange={(e) => setEditingValue(v => ({ ...v, criterion: e.target.value }))}
+                              className="flex-1 px-2 py-1 border rounded"
+                            />
+                            <input
+                              type="number"
+                              value={editingValue.weight}
+                              onChange={(e) => setEditingValue(v => ({ ...v, weight: parseInt(e.target.value) || 0 }))}
+                              className="w-20 px-2 py-1 border rounded"
+                              min={0}
+                              max={100}
+                            />
+                          </div>
+                        ) : (
+                          <span className="text-sm text-slate-700">{criterion.criterion}</span>
+                        )}
                         <div className="flex items-center space-x-2">
-                          <span className="text-sm font-medium text-slate-600">{criterion.weight}%</span>
-                          <button type="button" onClick={() => removeCriterion(index)} className="text-red-600 hover:text-red-800">
-                            <X className="w-4 h-4" />
-                          </button>
+                          {editingIndex === index ? (
+                            <>
+                              <button type="button" onClick={saveEditCriterion} className="text-green-600 hover:text-green-800" title="Save">
+                                <Check className="w-4 h-4" />
+                              </button>
+                              <button type="button" onClick={cancelEditCriterion} className="text-slate-500 hover:text-slate-700" title="Cancel">
+                                <X className="w-4 h-4" />
+                              </button>
+                            </>
+                          ) : (
+                            <>
+                              <span className="text-sm font-medium text-slate-600">{criterion.weight}%</span>
+                              <button type="button" onClick={() => startEditCriterion(index)} className="text-blue-600 hover:text-blue-800" title="Edit">
+                                <Pencil className="w-4 h-4" />
+                              </button>
+                              <button type="button" onClick={() => removeCriterion(index)} className="text-red-600 hover:text-red-800" title="Remove">
+                                <X className="w-4 h-4" />
+                              </button>
+                            </>
+                          )}
                         </div>
                       </div>
-                    )}
+                    ))}
                   </div>
                 </div>
 
@@ -733,18 +839,12 @@ export const InitiatePage = ({
               }
             </div>
 
-            <button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 px-6 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-200 flex items-center justify-center space-x-2">
+            <button type="submit" disabled={!criteriaValid} className={`w-full py-4 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center space-x-2 ${criteriaValid ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800' : 'bg-slate-300 text-slate-500 cursor-not-allowed'}`}>
               <Send className="w-5 h-5" />
               <span>Send Request</span>
             </button>
           </form>
 
-          {showSuccess && 
-            <div className="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center space-x-2 z-50">
-              <CheckCircle className="w-5 h-5" />
-              <span>Request sent successfully!</span>
-            </div>
-          }
         </div>
       </div>
     </div>;

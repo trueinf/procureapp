@@ -1,54 +1,47 @@
-# React + TypeScript + Vite
+# ProcureApp (React + TypeScript + Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This app includes an Initiate page for creating RFIs/RFQs and an elegant built‑in AI assistant.
 
-Currently, two official plugins are available:
+## Chatbot (Assistants API) Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The Initiate page includes a floating chat widget powered by a Netlify Function that proxies to OpenAI’s Assistants API. It can optionally ground answers on your Word document knowledge base using File Search.
 
-## Expanding the ESLint configuration
+Environment variables (set in Netlify):
+- `OPENAI_API_KEY`: your OpenAI API key
+- `OPENAI_ASSISTANT_ID`: the Assistant ID configured with `file_search` tool
+- `OPENAI_VECTOR_STORE_ID` (optional): vector store ID containing your KB files
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Function endpoints
+- `/.netlify/functions/chat` (POST): body `{ message, threadId? }` → `{ threadId, answer }`
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+Local development
+- Run with `netlify dev` to enable function routes alongside Vite.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+One‑time KB setup (outline)
+1) Upload your `.docx` to Files API with `purpose=file_search`.
+2) Create a vector store and attach the uploaded file.
+3) Create an Assistant with `file_search` enabled and point to the vector store.
+4) Put `OPENAI_ASSISTANT_ID` and `OPENAI_VECTOR_STORE_ID` in Netlify env.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+Notes
+- Never expose your API key in the browser. The frontend only calls the Netlify function.
+- The chat preserves a conversation `threadId` in localStorage to maintain context across refreshes.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
-```
+## Realtime Voice (Speech↔Speech)
+
+This app includes a voice button in the chat widget that starts a WebRTC session with OpenAI’s Realtime API.
+
+Env
+- `OPENAI_API_KEY` (already used)
+- `OPENAI_VECTOR_STORE_ID` (optional): if set, the server attaches your KB via `file_search` to the Realtime session.
+
+Endpoints
+- `/.netlify/functions/realtime-token` (POST): mints ephemeral session credentials for the browser.
+
+How it works
+- Browser requests a token → server calls `POST /v1/realtime/sessions` with headers `OpenAI-Beta: realtime=v1, assistants=v2`.
+- The session includes `tools=[{type:file_search}]` and `tool_resources` with your `OPENAI_VECTOR_STORE_ID` when provided.
+- Browser opens a WebRTC connection to `https://api.openai.com/v1/realtime?model=...` using the ephemeral token; mic is sent up, audio is streamed back.
+
+Run locally
+- `netlify dev` (so functions resolve). Use the Netlify URL (e.g. http://localhost:8888).

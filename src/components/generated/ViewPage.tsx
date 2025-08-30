@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { RFIRFQData } from './ProcureApp';
 import { Eye, Calendar, Users, FileText, MessageSquare, ArrowLeft, Send, Building2, DollarSign, Clock, MapPin, Phone, Mail, Download, Star, CheckCircle, AlertCircle, Package, Truck, Shield, BarChart3 } from 'lucide-react';
 interface ViewPageProps {
@@ -43,6 +43,18 @@ const sampleRFIRFQData: RFIRFQData[] = [{
   documents: [],
   coverLetter: 'Procurement of modern office equipment and ergonomic furniture for our new headquarters.',
   vendors: ['OfficeMax Business', 'Herman Miller', 'Steelcase', 'Humanscale']
+}, {
+  id: 'RFP-2024-004',
+  type: 'RFI',
+  status: 'Draft',
+  title: 'Enterprise Data Analytics Platform',
+  startDate: '2024-02-01',
+  endDate: '2024-03-01',
+  vendorCount: 4,
+  createdDate: '2024-01-25',
+  documents: [],
+  coverLetter: 'Seeking information and capabilities for a scalable analytics platform with BI and real-time reporting.',
+  vendors: ['Snowflake Partners', 'Databricks Pro', 'Google Cloud Platform', 'Microsoft Azure']
 }];
 
 // Enhanced vendor details with comprehensive information
@@ -140,11 +152,11 @@ export const ViewPage = ({
   onSelectRFIRFQ
 }: ViewPageProps) => {
   const [selectedItem, setSelectedItem] = useState<RFIRFQData | null>(null);
-  const [activeTab, setActiveTab] = useState<'overview' | 'vendors' | 'questions' | 'quotations'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'vendors' | 'questions' | 'quotations' | 'criteria'>('overview');
   const [questionResponse, setQuestionResponse] = useState('');
 
-  // Use sample data if no real data exists
-  const displayData = rfirfqData.length > 0 ? rfirfqData : sampleRFIRFQData;
+  // Always show prefilled samples plus any newly submitted requests
+  const displayData = [...sampleRFIRFQData, ...rfirfqData];
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'Draft':
@@ -174,6 +186,64 @@ export const ViewPage = ({
       onSelectRFIRFQ(selectedItem.id);
     }
   };
+
+  // Derived, simulated data for the selected item
+  const dynamicQuestions = useMemo(() => {
+    if (!selectedItem) return sampleQuestions;
+    const vendors = selectedItem.vendors && selectedItem.vendors.length > 0 ? selectedItem.vendors : ['Vendor A', 'Vendor B'];
+    const title = selectedItem.title || 'the request';
+    const category = (selectedItem.serviceCategory || '').toLowerCase();
+    const topics =
+      category.includes('it') || category.includes('tech')
+        ? ['security & compliance posture', 'SLAs and uptime guarantees', 'integration and API strategy', 'data migration plan', 'support and escalation process']
+        : category.includes('consult')
+        ? ['scope of work breakdown', 'deliverable acceptance criteria', 'resource mix and seniority', 'timeline & milestones', 'knowledge transfer plan']
+        : category.includes('construction')
+        ? ['site safety measures', 'permits and compliance', 'materials specification', 'project schedule buffer', 'warranty terms']
+        : ['scope details', 'key dates and milestones', 'commercial/payment terms', 'acceptance criteria', 'change control'];
+    const refs = ['Expected Outputs', 'Start Date & Milestones', 'Payment Terms', 'Compliance', 'Service Category'];
+    const now = new Date();
+    return Array.from({ length: 10 }).map((_, i) => {
+      const vendor = vendors[i % vendors.length];
+      const ts = new Date(now.getTime() - (i * 36e5)).toISOString().replace('T', ' ').slice(0, 16);
+      const topic = topics[i % topics.length];
+      const ref = refs[i % refs.length];
+      return {
+        id: `${selectedItem.id}-q${i + 1}`,
+        vendor,
+        question: `For "${title}", can you clarify ${topic}?`,
+        response: `Thanks ${vendor}. For "${title}", please refer to the ${ref} section. We can provide deeper detail during clarification calls.`,
+        timestamp: ts
+      };
+    });
+  }, [selectedItem]);
+
+  const dynamicQuotations = useMemo(() => {
+    if (!selectedItem) return sampleQuotations;
+    const vendors = selectedItem.vendors && selectedItem.vendors.length > 0 ? selectedItem.vendors : ['Vendor A', 'Vendor B'];
+    const sanitize = (s: string) => s.replace(/\s+/g, '_');
+    const today = new Date();
+    return vendors.map((vendor, i) => {
+      const fileName = `${sanitize(vendor)}_${sanitize(selectedItem.title || 'Proposal')}.pdf`;
+      const fileSize = `${(2 + (i % 4) + Math.random()).toFixed(1)} MB`;
+      const submittedDate = today.toISOString().split('T')[0];
+      const validUntil = new Date(today.getTime() + 45 * 24 * 3600 * 1000).toISOString().split('T')[0];
+      const base = 90000 + (i * 12000) + Math.floor(Math.random() * 10000);
+      const totalValue = `$${base.toLocaleString()}`;
+      const deliveryTime = `${3 + (i % 4)}-${5 + (i % 5)} weeks`;
+      return {
+        id: `${selectedItem.id}-quote-${i + 1}`,
+        vendor,
+        fileName,
+        fileSize,
+        submittedDate,
+        status: 'Submitted',
+        totalValue,
+        validUntil,
+        deliveryTime
+      } as any;
+    });
+  }, [selectedItem]);
   if (selectedItem) {
     const currentVendors = selectedItem.vendors || Object.keys(vendorDetails).slice(0, selectedItem.vendorCount);
     return <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
@@ -281,6 +351,10 @@ export const ViewPage = ({
                 id: 'quotations',
                 label: 'Quotations',
                 icon: FileText
+              }, {
+                id: 'criteria',
+                label: 'Scoring Criteria',
+                icon: Star
               }].map(tab => {
                 const Icon = tab.icon;
                 return <button key={tab.id} onClick={() => setActiveTab(tab.id as any)} className={`flex items-center space-x-2 px-6 py-4 font-medium text-sm transition-all duration-200 border-b-2 whitespace-nowrap ${activeTab === tab.id ? 'text-blue-600 border-blue-600 bg-blue-50/50' : 'text-slate-600 border-transparent hover:text-blue-600 hover:bg-slate-50'}`}>
@@ -335,6 +409,139 @@ export const ViewPage = ({
                       <p className="text-slate-700 leading-relaxed">{selectedItem.coverLetter}</p>
                     </div>
                   </div>
+
+                  {/* Additional Details from Initiate */}
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div className="space-y-4">
+                      <h4 className="text-base font-semibold text-slate-800">Engagement</h4>
+                      <div className="bg-slate-50 rounded-xl p-4 border">
+                        <p className="text-sm text-slate-500">Business Unit</p>
+                        <p className="font-medium text-slate-800">{selectedItem.businessUnit || '-'}</p>
+                      </div>
+                      <div className="bg-slate-50 rounded-xl p-4 border">
+                        <p className="text-sm text-slate-500">Owner</p>
+                        <p className="font-medium text-slate-800">{selectedItem.owner || '-'}</p>
+                      </div>
+                      <div className="bg-slate-50 rounded-xl p-4 border">
+                        <p className="text-sm text-slate-500">Service Category</p>
+                        <p className="font-medium text-slate-800">{selectedItem.serviceCategory || '-'}</p>
+                      </div>
+                      <div className="bg-slate-50 rounded-xl p-4 border">
+                        <p className="text-sm text-slate-500">Team Size</p>
+                        <p className="font-medium text-slate-800">{selectedItem.teamSize || '-'}</p>
+                      </div>
+                      <div className="bg-slate-50 rounded-xl p-4 border">
+                        <p className="text-sm text-slate-500">Work Location</p>
+                        <p className="font-medium text-slate-800">{selectedItem.workLocation || '-'}</p>
+                      </div>
+                    </div>
+                    <div className="space-y-4">
+                      <h4 className="text-base font-semibold text-slate-800">Capabilities</h4>
+                      <div className="bg-slate-50 rounded-xl p-4 border">
+                        <p className="text-sm text-slate-500 mb-2">Required Skills</p>
+                        <div className="flex flex-wrap gap-2">
+                          {(selectedItem.requiredSkills || []).length > 0 ? (
+                            (selectedItem.requiredSkills || []).map((s, i) => (
+                              <span key={i} className="px-2 py-1 rounded-md text-xs bg-green-100 text-green-700 border border-green-200">{s}</span>
+                            ))
+                          ) : (
+                            <span className="text-slate-500">-</span>
+                          )}
+                        </div>
+                      </div>
+                      <div className="bg-slate-50 rounded-xl p-4 border">
+                        <p className="text-sm text-slate-500 mb-2">Tool Preferences</p>
+                        <div className="flex flex-wrap gap-2">
+                          {(selectedItem.toolPreferences || []).length > 0 ? (
+                            (selectedItem.toolPreferences || []).map((t, i) => (
+                              <span key={i} className="px-2 py-1 rounded-md text-xs bg-sky-100 text-sky-700 border border-sky-200">{t}</span>
+                            ))
+                          ) : (
+                            <span className="text-slate-500">-</span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="space-y-4">
+                      <h4 className="text-base font-semibold text-slate-800">Commercial</h4>
+                      <div className="bg-slate-50 rounded-xl p-4 border">
+                        <p className="text-sm text-slate-500">Pricing Model</p>
+                        <p className="font-medium text-slate-800">{selectedItem.pricingModel || '-'}</p>
+                      </div>
+                      <div className="bg-slate-50 rounded-xl p-4 border">
+                        <p className="text-sm text-slate-500">Budget Estimate</p>
+                        <p className="font-medium text-slate-800">{selectedItem.budgetEstimate || '-'}</p>
+                      </div>
+                      <div className="bg-slate-50 rounded-xl p-4 border">
+                        <p className="text-sm text-slate-500">Payment Terms</p>
+                        <p className="font-medium text-slate-800">{selectedItem.paymentTerms || '-'}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Deliverables & Milestones */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div>
+                      <h3 className="text-lg font-semibold text-slate-800 mb-4">Expected Outputs</h3>
+                      <div className="bg-slate-50 rounded-xl p-6 border border-slate-200/50">
+                        <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">{selectedItem.expectedOutputs || '-'}</p>
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-slate-800 mb-4">Start Date & Milestones</h3>
+                      <div className="bg-slate-50 rounded-xl p-6 border border-slate-200/50">
+                        <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">{selectedItem.startDateMilestones || '-'}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div className="space-y-4">
+                      <h4 className="text-base font-semibold text-slate-800">Timeline</h4>
+                      <div className="bg-slate-50 rounded-xl p-4 border">
+                        <p className="text-sm text-slate-500">Response Deadline</p>
+                        <p className="font-medium text-slate-800">{selectedItem.responseDeadline || '-'}</p>
+                      </div>
+                      <div className="bg-slate-50 rounded-xl p-4 border">
+                        <p className="text-sm text-slate-500">Bid Validity (days)</p>
+                        <p className="font-medium text-slate-800">{selectedItem.bidValidity || '-'}</p>
+                      </div>
+                    </div>
+                    <div className="space-y-4">
+                      <h4 className="text-base font-semibold text-slate-800">Compliance</h4>
+                      <div className="bg-slate-50 rounded-xl p-4 border">
+                        <p className="text-sm text-slate-500">NDA Required</p>
+                        <p className="font-medium text-slate-800">{selectedItem.ndaRequired ? 'Yes' : 'No'}</p>
+                      </div>
+                      <div className="bg-slate-50 rounded-xl p-4 border">
+                        <p className="text-sm text-slate-500 mb-2">Supplier Eligibility</p>
+                        <div className="flex flex-wrap gap-2">
+                          {(selectedItem.supplierEligibility || []).length > 0 ? (
+                            (selectedItem.supplierEligibility || []).map((se, i) => (
+                              <span key={i} className="px-2 py-1 rounded-md text-xs bg-amber-100 text-amber-700 border border-amber-200">{se}</span>
+                            ))
+                          ) : (
+                            <span className="text-slate-500">-</span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="space-y-4">
+                      <h4 className="text-base font-semibold text-slate-800">Workflow</h4>
+                      <div className="bg-slate-50 rounded-xl p-4 border">
+                        <p className="text-sm text-slate-500 mb-2">Approvers</p>
+                        <div className="flex flex-wrap gap-2">
+                          {(selectedItem.approvers || []).length > 0 ? (
+                            (selectedItem.approvers || []).map((a, i) => (
+                              <span key={i} className="px-2 py-1 rounded-md text-xs bg-purple-100 text-purple-700 border border-purple-200">{a}</span>
+                            ))
+                          ) : (
+                            <span className="text-slate-500">-</span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>}
 
               {/* Vendors Tab */}
@@ -343,7 +550,21 @@ export const ViewPage = ({
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {currentVendors.map(vendorName => {
                   const vendor = vendorDetails[vendorName as keyof typeof vendorDetails];
-                  if (!vendor) return null;
+                  if (!vendor) {
+                    return <div key={vendorName} className="bg-gradient-to-br from-white to-slate-50 rounded-xl p-6 border border-slate-200/50 hover:shadow-lg transition-all duration-200">
+                            <div className="flex items-start justify-between mb-4">
+                              <div>
+                                <h3 className="text-lg font-semibold text-slate-800 mb-1">{vendorName}</h3>
+                                <p className="text-slate-600">Invited vendor</p>
+                              </div>
+                              <div className="flex items-center space-x-1 bg-slate-50 px-3 py-1 rounded-full border border-slate-200">
+                                <Star className="w-4 h-4 text-amber-500" />
+                                <span className="text-sm font-semibold text-slate-700">N/A</span>
+                              </div>
+                            </div>
+                            <div className="text-sm text-slate-600">Details will appear as vendors respond.</div>
+                          </div>;
+                  }
                   return <div key={vendorName} className="bg-gradient-to-br from-white to-slate-50 rounded-xl p-6 border border-slate-200/50 hover:shadow-lg transition-all duration-200">
                           <div className="flex items-start justify-between mb-4">
                             <div>
@@ -394,12 +615,12 @@ export const ViewPage = ({
                   <div className="flex items-center justify-between">
                     <h2 className="text-xl font-semibold text-slate-800">Vendor Questions & Responses</h2>
                     <span className="text-sm text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
-                      {sampleQuestions.length} questions
+                      {dynamicQuestions.length} questions
                     </span>
                   </div>
                   
                   <div className="space-y-4">
-                    {sampleQuestions.map(question => <div key={question.id} className="bg-gradient-to-r from-slate-50 to-blue-50/30 rounded-xl p-6 border border-slate-200/50 hover:shadow-md transition-all duration-200">
+                    {dynamicQuestions.map(question => <div key={question.id} className="bg-gradient-to-r from-slate-50 to-blue-50/30 rounded-xl p-6 border border-slate-200/50 hover:shadow-md transition-all duration-200">
                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4">
                           <div className="flex items-center space-x-3">
                             <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
@@ -445,12 +666,12 @@ export const ViewPage = ({
                   <div className="flex items-center justify-between">
                     <h2 className="text-xl font-semibold text-slate-800">Submitted Quotations</h2>
                     <span className="text-sm text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
-                      {sampleQuotations.length} submissions
+                      {dynamicQuotations.length} submissions
                     </span>
                   </div>
                   
                   <div className="space-y-4">
-                    {sampleQuotations.map(quotation => <div key={quotation.id} className="bg-gradient-to-r from-white to-slate-50/50 rounded-xl p-6 border border-slate-200/50 hover:shadow-lg transition-all duration-200">
+                    {dynamicQuotations.map(quotation => <div key={quotation.id} className="bg-gradient-to-r from-white to-slate-50/50 rounded-xl p-6 border border-slate-200/50 hover:shadow-lg transition-all duration-200">
                         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-4">
                           <div className="flex items-center space-x-4">
                             <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-md">
@@ -505,6 +726,29 @@ export const ViewPage = ({
                       </div>)}
                   </div>
                 </div>}
+
+              {/* Scoring Criteria Tab */}
+              {activeTab === 'criteria' && (
+                <div className="space-y-6">
+                  <h2 className="text-xl font-semibold text-slate-800">Scoring Criteria</h2>
+                  {Array.isArray(selectedItem.scoringCriteria) && selectedItem.scoringCriteria.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {selectedItem.scoringCriteria.map((c, idx) => (
+                        <div key={idx} className="p-4 rounded-xl border bg-slate-50">
+                          <div className="flex items-center justify-between">
+                            <div className="font-medium text-slate-800">{c.criterion}</div>
+                            <div className="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 border border-blue-200">
+                              {c.weight}%
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-slate-600">No scoring criteria provided for this request.</div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
