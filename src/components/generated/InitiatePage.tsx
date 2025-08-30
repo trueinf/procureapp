@@ -749,4 +749,3 @@ export const InitiatePage = ({
       </div>
     </div>;
 };
-};
