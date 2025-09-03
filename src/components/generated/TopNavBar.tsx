@@ -86,7 +86,7 @@ export const TopNavBar = ({
                     </div>}
                 </button>
                 {item.submenu && (
-                  <div className="absolute left-0 mt-2 hidden group-hover:block bg-white text-slate-800 rounded-xl shadow-xl border z-20 min-w-[220px]">
+                  <div className="absolute left-0 top-full hidden group-hover:block bg-white text-slate-800 rounded-xl shadow-xl border z-20 min-w-[220px]">
                     {item.submenu.map((sub: any) => (
                       <button
                         key={sub.id}

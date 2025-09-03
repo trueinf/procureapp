@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { RFIRFQData } from './ProcureApp';
 import { Upload, Calendar, Users, FileText, Send, CheckCircle, Building2, User, Target, DollarSign, ClipboardCheck, Workflow, ChevronDown, Plus, X, Pencil, Check } from 'lucide-react';
 interface InitiatePageProps {
@@ -190,6 +190,19 @@ export const InitiatePage = ({
   );
 
   const criteriaValid = formData.scoringCriteria.length === 0 || totalCriteriaWeight === 100;
+
+  // Load ElevenLabs ConvAI widget script once
+  useEffect(() => {
+    const scriptId = 'elevenlabs-convai-embed';
+    if (!document.getElementById(scriptId)) {
+      const s = document.createElement('script');
+      s.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
+      s.async = true;
+      s.type = 'text/javascript';
+      s.id = scriptId;
+      document.body.appendChild(s);
+    }
+  }, []);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!criteriaValid) {
@@ -846,5 +859,7 @@ export const InitiatePage = ({
 
         </div>
       </div>
+      {/* ElevenLabs voice bot */}
+      <elevenlabs-convai agent-id="agent_7601k3xeyd7feyk8gx1ak2sc4egn"></elevenlabs-convai>
     </div>;
 };
